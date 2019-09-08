@@ -32,4 +32,8 @@ return [
     'size'                  => 'اندازه',
     'terms'                 => 'شرایط',
     'province'              => 'استان',
+    'register'              => 'ذخیره',
+    'operation'             => 'عملیات',
+    'updated_at'             => 'تاریخ بروزرسانی',
+
 ];

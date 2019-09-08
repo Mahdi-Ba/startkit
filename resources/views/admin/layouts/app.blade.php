@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -19,7 +21,10 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
     @yield('header')
+    <script src="/js/app.js"></script>
 </head>
 
 <body>
@@ -222,7 +227,7 @@
         <!-- ============================================================== -->
         <!-- Container fluid  -->
         <!-- ============================================================== -->
-        <div class="container-fluid">
+        <div id="app" class="container-fluid">
             <!-- ============================================================== -->
             <!-- Start Page Content -->
             <!-- ============================================================== -->
@@ -346,6 +351,7 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
+
 <script src="/admin_template/assets/libs/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap tether Core JavaScript -->
 <script src="/admin_template/assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -363,7 +369,8 @@
 <script src="/admin_template/dist/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
 <script src="/admin_template/dist/js/custom.min.js"></script>
-@yield('script')
+
+    @yield('script')
 </body>
 
 </html>

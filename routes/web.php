@@ -28,5 +28,4 @@ Route::get('/admin', function () {
     return view('admin.home');
 });
 
-Route::get('/admin/register', 'RegistrationController@create')->name('register');
-Route::post('/admin/register', 'RegistrationController@store');
+Route::resource('/admin/register', 'RegistrationController');
