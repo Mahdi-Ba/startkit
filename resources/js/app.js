@@ -7,6 +7,10 @@
 require('./bootstrap');
 window.moment = require('moment');
 moment.locale('fa');
+import {Form} from './form'
+window.Form =  Form;
+import {Errors} from './errors'
+window.Errors = Errors;
 window.Vue = require('vue');
 
 
@@ -26,6 +30,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 
+
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -34,4 +41,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 
 const app = new Vue({
     el: '#app',
+
 });
+
+

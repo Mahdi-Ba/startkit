@@ -6,6 +6,10 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use const Grpc\STATUS_ABORTED;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
+
 
 class RegistrationController extends Controller
 {
@@ -15,32 +19,48 @@ class RegistrationController extends Controller
     }
     public function users(Request $request)
     {
-        $users = User::paginate(10);
+        $users = User::latest()->paginate(10);
         return response()->json($users);
     }
     public function create()
     {
-        return view('admin.register');
+        $user = new User();
+        return view('admin.register',['user'=>$user]);
     }
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => ['required','string','email','max:255',
+                Rule::unique('users')->ignore($request->id),
+            ],
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6'
         ]);
 
-        $user = User::create($request->all());
+        if ($validator->fails()) {
+            return Response($validator->errors(),400);
+        }
+
+        $user = User::updateOrCreate(['id' => $request->id],
+            $request->all()
+        );
         $user->fill(['password' => Hash::make($request->password)]);
         $user->save();
+
         if($user){
-            return redirect()->back()->with(['success'=> 'ثبت با موفقیت انجام شد']);
+            return Response('true',200);;
         }
-        return redirect()->back();
+        return Response('false',200);;
 
     }
-   public function destroy($id){
+    public function show($id)
+    {
+        $user = User::find($id);
+        return view('admin.register',['user' =>$user]);
+    }
+
+    public function destroy($id){
        $user = User::find($id);
        if($user != null)
        {

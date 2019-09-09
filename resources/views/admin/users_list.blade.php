@@ -2,6 +2,33 @@
 @section('sidebar_title','مدیریت اعضا')
 @section('header')
     <link href="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <style>
+
+        .page-item .page-link {
+
+            z-index: 1;
+
+            color: #fff;
+
+            background-color: #20c997;
+
+            border-color: #AEFF5E;
+
+        }
+        .page-item.active .page-link {
+
+            z-index: 1;
+
+            color: #fff;
+
+            background-color: #8877e0;
+
+            border-color: #AEFF5E;
+
+        }
+
+
+    </style>
 @endsection
 
 @section('content')
@@ -35,7 +62,7 @@
                                 <td >@{{ user.updated_at | moment}}</td>
                                         <td>
                                <a  @click="deleteUser(user.id)" class="btn btn-outline-danger" href="#">حذف<i class="ti-trash"></i></a>
-                               <a class="btn btn-outline-info" href="{{action('RegistrationController@create')}}">ویرایش<i class="ti-trash"></i></a>
+                               <a class="btn btn-outline-info" :href="'register/'+user.id">ویرایش<i class="ti-trash"></i></a>
 
                            </td>
 
