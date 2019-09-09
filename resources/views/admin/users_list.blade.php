@@ -27,25 +27,41 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
 
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->updated_at}}</td>
-                                    <td>
+                            <tr v-for="(user , index) in Users.data" :key="user.id">
+                                <td >@{{ index+1 }}</td>
+                                <td >@{{ user.name }}</td>
+                                <td >@{{ user.email }}</td>
+                                <td >@{{ user.updated_at | moment}}</td>
+                                        <td>
+                               <a  @click="deleteUser(user.id)" class="btn btn-outline-danger" href="#">حذف<i class="ti-trash"></i></a>
+                               <a class="btn btn-outline-info" href="{{action('RegistrationController@create')}}">ویرایش<i class="ti-trash"></i></a>
+
+                           </td>
+
+                            </tr>
+                           {{--     <tr>--}}
+
+                            {{--        <td>
                                         <a  @click="deleteUser({{$user->id}})" class="btn btn-outline-danger" href="#">حذف<i class="ti-trash"></i></a>
                                         <a class="btn btn-outline-info" href="{{action('RegistrationController@create')}}">ویرایش<i class="ti-trash"></i></a>
 
-                                    </td>
+                                    </td>--}}
 
-                                </tr>
-                            @endforeach
+                       {{--         </tr>--}}
+
+
+
+
+
+
+
                             </tbody>
                         </table>
+                        <pagination :data="Users" @pagination-change-page="getResults"></pagination>
+
                     </div>
-                    {{$users->links()}}
+                {{--    {{$users->links()}}--}}
                 </div>
             </div>
         </div>
@@ -57,19 +73,53 @@
 
 @section('script')
     <script !src="">
-        var vm = new Vue({
+        const app = new Vue({
             el: '#app',
-            data: function () {
+            data() {
                 return {
-                    test: 'jkkjdekdej'
+                    // Our data object that holds the Laravel paginator data
+                    Users: {},
+                    testtt: false
                 }
-            },mounted(){
+            },
 
-            },methods:{
-                deleteUser(id){
-                    this.ali(id);
+            mounted() {
+                // Fetch initial results
+                this.getResults();
+            },
+
+            methods: {
+                responseAlert(input)
+                {
+                    if(input)
+                    {
+                        this.getResults();
+                        Swal.fire(
+                            'پاک شد!',
+                            'اطلاعات به درستی پاک شد.',
+                            'success'
+                        );
+
+                    } else{
+                        Swal.fire(
+                            'پاک نشد!',
+                            'اطلاعات به درستی پاک نشد.',
+                            'warning'
+                        );
+                    }
+                }           ,
+                // Our method to GET results from a Laravel endpoint
+                getResults(page = 1) {
+                    axios.get('/admin/users?page=' + page)
+                        .then(response => {
+                            this.Users = response.data;
+                        });
                 },
-                ali(id){
+                deleteUser(id){
+                 this.confirm(id);
+                },
+                confirm(id){
+                    var self= this;
                     Swal.fire({
                         title: 'از انجام عملیات مطمئن هستید؟',
                         text: "برگشت اطلاعات امکان پذیر نیست",
@@ -80,31 +130,32 @@
                         confirmButtonText: 'بله',
                         cancelButtonText: 'خیر'
                     }).then((result) => {
-                        axios.delete('/admin/register/'+id)
-                            .then(function (response) {
-                                Swal.fire(
-                                    'پاک شد!',
-                                    'اطلاعات به درستی پاک شد.',
-                                    'success'
-                                )
-                            })
-                            .catch(function (error) {
-                                Swal.fire(
-                                    'پاک نشد!',
-                                    'اطلاعات به درستی پاک نشد.',
-                                    'warning'
-                                )
-                            });
-
-
+                        if (result.value) {
+                            axios.delete('/admin/register/'+id)
+                                .then(function (response) {
+                                    self.responseAlert(response.data);
+                                })
+                                .catch(function (error) {
+                                    self.responseAlert(false);
+                                });
+                        }
                     });
 
+                }
+            },
+            filters: {
+                moment: function (date) {
+                    return moment(date).fromNow();
+                }
             }
-        }});
+
+        });
+
 
 
 
 
     </script>
     <script src="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
 @endsection

@@ -29,3 +29,4 @@ Route::get('/admin', function () {
 });
 
 Route::resource('/admin/register', 'RegistrationController');
+Route::get('/admin/users', 'RegistrationController@users');

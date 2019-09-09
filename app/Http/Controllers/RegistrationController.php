@@ -10,9 +10,13 @@ use const Grpc\STATUS_ABORTED;
 class RegistrationController extends Controller
 {
     public function index(){
-        $users =User::paginate(3);
 
-        return view('admin.users_list',['users' => $users]);
+        return view('admin.users_list');
+    }
+    public function users(Request $request)
+    {
+        $users = User::paginate(10);
+        return response()->json($users);
     }
     public function create()
     {
@@ -31,9 +35,9 @@ class RegistrationController extends Controller
         $user->fill(['password' => Hash::make($request->password)]);
         $user->save();
         if($user){
-            return redirect()->to('/admin/register')->with(['success'=> 'ثبت با موفقیت انجام شد']);
+            return redirect()->back()->with(['success'=> 'ثبت با موفقیت انجام شد']);
         }
-        return redirect()->to('/admin/register');
+        return redirect()->back();
 
     }
    public function destroy($id){
@@ -41,9 +45,9 @@ class RegistrationController extends Controller
        if($user != null)
        {
            $user->delete();
-           return response('delete',200);
+           return response('true',200);
        }
-       return response('Not delete',404);
+       return response('false',200);
 
     }
 }
