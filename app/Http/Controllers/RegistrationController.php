@@ -14,7 +14,7 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        return view('admin.users_list');
+        return view('admin.register.users_list');
     }
 
     public function users(Request $request)
@@ -25,14 +25,14 @@ class RegistrationController extends Controller
             $users->where('name', 'like', '%' . $request->name . '%');
         if ($request->filled('email'))
             $users->where('email', 'like', '%' . $request->email . '%');
-        $users = $users->paginate(10);
+        $users = $users->paginate(8);
         return response()->json($users);
     }
 
     public function create()
     {
         $user = new User();
-        return view('admin.register', ['user' => $user]);
+        return view('admin.register.register', ['user' => $user]);
     }
 
     public function store(Request $request)

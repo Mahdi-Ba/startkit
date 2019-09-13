@@ -117,9 +117,11 @@
                                     <p class=" m-b-0">{{auth()->user()->email}}</p>
                                 </div>
                             </div>
-                            <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> پروفایل من </a>
+                            <a class="dropdown-item" href="/admin/register/{{auth()->user()->id}}"><i class="ti-user m-r-5 m-l-5"></i> پروفایل من </a>
                             <div class="dropdown-divider"></div>
+{{--
                             <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> مدیریت حساب کاربری</a>
+--}}
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -164,9 +166,11 @@
                                     <span class="op-5 user-email">{{auth()->user()->email}}</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> پروفایل من</a>
+                                    <a class="dropdown-item" href="/admin/register/{{auth()->user()->id}}"><i class="ti-user m-r-5 m-l-5"></i> پروفایل من</a>
                                     <div class="dropdown-divider"></div>
+{{--
                                     <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> مدیریت حساب کاربری</a>
+--}}
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -180,9 +184,10 @@
                     </li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin" aria-expanded="false"><i class="ti-loop"></i><span class="hide-menu">داشبورد</span></a></li>
                         <ul aria-expanded="false" class=" first-level">
-                            <li class="sidebar-item"><a href="/admin/register" class="sidebar-link"><i class="mdi mdi-playlist-check"></i><span class="hide-menu">مدیریت کاربران</span></a></li>
-                            <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><i class="mdi mdi-playlist-check"></i><span class="hide-menu">مدیریت مقالات </span></a></li>
-                            <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><i class="mdi mdi-playlist-check"></i><span class="hide-menu">مدیریت اطلاعات شرکت </span></a></li>
+                            <li class="sidebar-item"><a href="/admin/register" class="sidebar-link"><i class="mdi mdi-account"></i><span class="hide-menu">مدیریت کاربران</span></a></li>
+                            <li class="sidebar-item"><a target="_blank" href="/admin/laravel-filemanager" class="sidebar-link"><i class="mdi mdi-file"></i><span class="hide-menu">مدیریت فایل ها</span></a></li>
+                            <li class="sidebar-item"><a href="/admin/blog" class="sidebar-link"><i class="mdi mdi-newspaper"></i><span class="hide-menu">مدیریت مقالات </span></a></li>
+                            <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><i class="mdi mdi-information-variant"></i><span class="hide-menu">مدیریت اطلاعات شرکت </span></a></li>
                         </ul>
                     </li>
                 </ul>

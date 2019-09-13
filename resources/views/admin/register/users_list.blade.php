@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('sidebar_title','مدیریت اعضا')
+@section('sidebar_title','مدیریت کاربران')
 @section('header')
     <link href="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 @endsection
@@ -22,10 +22,14 @@
                                 <h4>جست و جو</h4>
                             </div>
                             <div class="col">
-                                <input class="form-control" placeholder="نام" v-model="name_search" type="text">
+                                <label for="name_search">نام کاربری</label>
+                                <input id="name_search" class="form-control" placeholder="مثال: مهدی بهاری" v-model="name_search" type="text">
                             </div>
+
                             <div class="col">
-                                <input class="form-control" placeholder="ایمیل" v-model="email_search" type="text">
+                                <label for="email_search">ایمیل</label>
+
+                                <input id="email_search" class="form-control" placeholder="مثال: baharimahdi93@gmail.com" v-model="email_search" type="text">
                             </div>
                         </div>
 
