@@ -30,7 +30,7 @@
 
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control " name="name"  v-bind:class="getClass(form.errors.has('name'))"
-                                   value="{{ old('name') }}" required autocomplete="name" v-model="form.name" autofocus>
+                                  required autocomplete="name" v-model="form.name" autofocus>
                             <div class="invalid-feedback " v-show="form.errors.has('name')">
                                 <strong>@{{ form.errors.get('name') }}</strong>
                             </div>
@@ -43,7 +43,7 @@
 
                         <div class="col-md-6">
                             <input id="email" type="text" class="form-control " name="email"  v-bind:class="getClass(form.errors.has('email'))"
-                                   value="{{ old('email') }}" required autocomplete="email" v-model="form.email" autofocus>
+                                   required autocomplete="email" v-model="form.email" autofocus>
                             <div class="invalid-feedback " v-show="form.errors.has('email')">
                                 <strong>@{{ form.errors.get('email') }}</strong>
                             </div>
@@ -57,7 +57,7 @@
 
                         <div class="col-md-6">
                             <input id="password" type="text" class="form-control " name="password"  v-bind:class="getClass(form.errors.has('password'))"
-                                   value="{{ old('password') }}" required autocomplete="new-password" v-model="form.password" autofocus>
+                                    required autocomplete="new-password" v-model="form.password" autofocus>
                             <div class="invalid-feedback " v-show="form.errors.has('password')">
                                 <strong>@{{ form.errors.get('password') }}</strong>
                             </div>
@@ -69,7 +69,7 @@
 
                         <div class="col-md-6">
                             <input id="password_confirmation" type="text" class="form-control " name="password_confirmation"  v-bind:class="getClass(form.errors.has('password_confirmation'))"
-                                   value="{{ old('password_confirmation') }}" required autocomplete="new-password" v-model="form.password_confirmation" autofocus>
+                                  required autocomplete="new-password" v-model="form.password_confirmation" autofocus>
                             <div class="invalid-feedback " v-show="form.errors.has('password')">
                                 <strong>@{{ form.errors.get('password_confirmation') }}</strong>
                             </div>
@@ -84,7 +84,7 @@
                         <div class="col-md-6 offset-md-4">
                             <button  :disabled="form.errors.any()" type="submit" class="btn btn-primary">
                                 <i class="ti-save"></i>
-                                {{ __('Register') }}
+                              ذخیره
                             </button>
                         </div>
                     </div>

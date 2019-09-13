@@ -19,7 +19,6 @@ class RegistrationController extends Controller
 
     public function users(Request $request)
     {
-
         $users = User::query();
         if ($request->filled('name'))
             $users->where('name', 'like', '%' . $request->name . '%');
@@ -66,7 +65,7 @@ class RegistrationController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('admin.register', ['user' => $user]);
+        return view('admin.register.register', ['user' => $user]);
     }
 
     public function destroy($id)
