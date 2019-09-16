@@ -27,3 +27,6 @@ Route::get('/admin/blog', function () {
     return view('admin.blog.index');
 });
 
+/* category*/
+Route::resource('/admin/category', 'CategoryController');
+Route::get('/admin/categories', 'CategoryController@categories');

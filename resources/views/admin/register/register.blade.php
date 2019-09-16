@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('sidebar_title','مدیریت اعضا')
 @section('header')
-    <link href="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="/admin_template/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
 @endsection
 
@@ -56,7 +56,7 @@
                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('persian.password') }}</label>
 
                         <div class="col-md-6">
-                            <input id="password" type="text" class="form-control " name="password"  v-bind:class="getClass(form.errors.has('password'))"
+                            <input id="password" type="password" class="form-control " name="password"  v-bind:class="getClass(form.errors.has('password'))"
                                     required autocomplete="new-password" v-model="form.password" autofocus>
                             <div class="invalid-feedback " v-show="form.errors.has('password')">
                                 <strong>@{{ form.errors.get('password') }}</strong>
@@ -68,7 +68,7 @@
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('persian.password_confirmation') }}</label>
 
                         <div class="col-md-6">
-                            <input id="password_confirmation" type="text" class="form-control " name="password_confirmation"  v-bind:class="getClass(form.errors.has('password_confirmation'))"
+                            <input id="password_confirmation" type="password" class="form-control " name="password_confirmation"  v-bind:class="getClass(form.errors.has('password_confirmation'))"
                                   required autocomplete="new-password" v-model="form.password_confirmation" autofocus>
                             <div class="invalid-feedback " v-show="form.errors.has('password')">
                                 <strong>@{{ form.errors.get('password_confirmation') }}</strong>
@@ -148,6 +148,6 @@
 
 
     </script>
-    <script src="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="/admin_template/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 @endsection

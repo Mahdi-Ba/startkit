@@ -56,9 +56,9 @@ class RegistrationController extends Controller
         $user->save();
 
         if ($user) {
-            return Response('true', 200);;
+            return Response('true', 200);
         }
-        return Response('false', 200);;
+        return Response('false', 200);
 
     }
 
