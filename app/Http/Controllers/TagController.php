@@ -19,7 +19,7 @@ class TagController extends Controller
         return view('admin.tag.list');
     }
 
-    public function Tags(Request $request)
+    public function tags(Request $request)
     {
 
         $tag = Tag::query();

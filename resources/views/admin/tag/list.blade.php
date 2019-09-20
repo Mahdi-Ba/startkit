@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('sidebar_title','مدیریت دسته بند ی ها')
+@section('sidebar_title','مدیریت تگ ها')
 @section('header')
     <link href="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 @endsection
@@ -9,12 +9,12 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">مدیریت دسته بندی ها</h4>
+                    <h4 class="card-title">مدیریت تگ ها</h4>
                     <h6 class="card-subtitle">
                         <div class="row">
                             <div class="col-3">
-                                <a class="btn btn-outline-primary" href="{{action('CategoryController@create')}}">افزودن
-                                    دسته بندی جدید
+                                <a class="btn btn-outline-primary" href="{{action('TagController@create')}}">افزودن
+                                    تگ جدید
                                     <i class="ti-save"></i>
                                 </a>
                             </div>
@@ -22,8 +22,8 @@
                                 <h4>جست و جو</h4>
                             </div>
                             <div class="col">
-                                <label for="title_search">عنوان </label>
-                                <input id="title_search" class="form-control" placeholder="مثال: عنوان 1" v-model="title_search" type="text">
+                                <label for="title_search">نام </label>
+                                <input id="title_search" class="form-control" placeholder="مثال: نام 1" v-model="title_search" type="text">
                             </div>
 
 
@@ -35,24 +35,22 @@
                             <thead class="bg-success text-white">
                             <tr>
                                 <th>#</th>
-                                <th>عنوان</th>
+                                <th>نام</th>
                                 <th>slug</th>
-                                <th>وضعیت</th>
                                 <th>{{__('persian.updated_at')}}</th>
                                 <th>{{__('persian.operation')}}</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(category , index) in categories.data" :key="category.id">
+                                <tr v-for="(tag , index) in tags.data" :key="tag.id">
                                     <td>@{{ index+1 }}</td>
-                                    <td>@{{ category.title }}</td>
-                                    <td>@{{ category.slug }}</td>
-                                    <td>@{{ active[index] }}</td>
-                                    <td>@{{ category.updated_at | moment}}</td>
+                                    <td>@{{ tag.name.fa }}</td>
+                                    <td>@{{ tag.slug.fa }}</td>
+                                    <td>@{{ tag.updated_at | moment}}</td>
                                     <td>
-                                        <a @click="deleteCategory(category.id)" class="btn btn-outline-danger" href="#">حذف<i
+                                        <a @click="deleteTag(tag.id)" class="btn btn-outline-danger" href="#">حذف<i
                                                 class="ti-trash"></i></a>
-                                        <a class="btn btn-outline-info" :href="'/admin/category/'+category.id">ویرایش<i
+                                        <a class="btn btn-outline-info" :href="'/admin/tag/'+tag.id">ویرایش<i
                                                 class="ti-trash"></i></a>
 
                                     </td>
@@ -60,7 +58,7 @@
                             </tbody>
                         </table>
 
-                        <pagination :limit="5" :data="categories" @pagination-change-page="getResults">
+                        <pagination :limit="5" :data="tags" @pagination-change-page="getResults">
                             <span slot="prev-nav">&lt; قبلی</span>
                             <span slot="next-nav">بعدی &gt;</span>
                         </pagination>
@@ -78,17 +76,10 @@
             data() {
                 return {
                     // Our data object that holds the Laravel paginator data
-                    categories: {},
+                    tags: {},
                     title_search: "",
 
                 }
-            },
-            computed: {
-                active() {
-                    return this.categories.data.map(function(item) {
-                        return item.is_active == 0 ? 'غیر فعال' :'فعال';
-                    });
-                },
             },
             mounted() {
                 // Fetch initial results
@@ -114,12 +105,12 @@
                 },
                 // Our method to GET results from a Laravel endpoint
                 getResults(page = 1, title = "") {
-                    axios.get('/admin/categories?title=' + title +'&page=' + page)
+                    axios.get('/admin/tags?name=' + title +'&page=' + page)
                         .then(response => {
-                            this.categories = response.data;
+                            this.tags = response.data;
                         });
                 },
-                deleteCategory(id) {
+                deleteTag(id) {
                     this.confirm(id);
                 },
                 confirm(id) {
@@ -135,7 +126,7 @@
                         cancelButtonText: 'خیر'
                     }).then((result) => {
                         if (result.value) {
-                            axios.delete('/admin/category/' + id)
+                            axios.delete('/admin/tag/' + id)
                                 .then(function (response) {
                                     self.responseAlert(response.data);
                                 })

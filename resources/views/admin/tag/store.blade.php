@@ -1,53 +1,7 @@
 @extends('admin.layouts.app')
-@section('sidebar_title','مدیریت دسته بندی ها')
+@section('sidebar_title','مدیریت تگ ها')
 @section('header')
     <link href="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <style>
-        .switch input {
-            display:none;
-        }
-        .switch {
-            display:inline-block;
-            width:60px;
-            height:30px;
-            margin:8px;
-            transform:translateY(50%);
-            position:relative;
-        }
-
-        .slider {
-            position:absolute;
-            top:0;
-            bottom:0;
-            left:0;
-            right:0;
-            border-radius:30px;
-            box-shadow:0 0 0 2px #777, 0 0 4px #777;
-            cursor:pointer;
-            border:4px solid transparent;
-            overflow:hidden;
-            transition:.4s;
-        }
-        .slider:before {
-            position:absolute;
-            content:"";
-            width:100%;
-            height:100%;
-            background:#777;
-            border-radius:30px;
-            transform:translateX(-30px);
-            transition:.4s;
-        }
-
-        input:checked + .slider:before {
-            transform:translateX(30px);
-            background:limeGreen;
-        }
-        input:checked + .slider {
-            box-shadow:0 0 0 2px limeGreen,0 0 2px limeGreen;
-        }
-
-    </style>
 @endsection
 
 @section('content')
@@ -71,13 +25,13 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="title" class="col-md-4 col-form-label text-md-right">عنوان</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right">نام</label>
 
                         <div class="col-md-6">
-                            <input id="title" type="text" class="form-control " name="title"  v-bind:class="getClass(form.errors.has('title'))"
-                                  required autocomplete="title" v-model="form.title" autofocus>
-                            <div class="invalid-feedback " v-show="form.errors.has('title')">
-                                <strong>@{{ form.errors.get('title') }}</strong>
+                            <input id="name" type="text" class="form-control " name="name"  v-bind:class="getClass(form.errors.has('name'))"
+                                  required autocomplete="name" v-model="form.name" autofocus>
+                            <div class="invalid-feedback " v-show="form.errors.has('name')">
+                                <strong>@{{ form.errors.get('name') }}</strong>
                             </div>
                         </div>
                     </div>
@@ -93,18 +47,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <label for="myCheckbox" class="col-md-4 col-form-label text-md-right">وضعیت</label>
-
-                        <label class="switch">
-                            <input id="myCheckbox" v-model="form.is_active"  type="checkbox" >
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-
-
 
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4" v-bind:class="getClass(form.errors.has('is_active'))">
@@ -138,16 +80,16 @@
             el: '#app',
             data: {
                 form: new Form({
-                    id:"{{$category->id}}",
-                    title: "{{$category->title}}",
-                    slug: "{{$category->slug}}",
-                    is_active: "{{$category->is_active}}",
+                    id:"{{$tag->id}}",
+                    name: "{{$tag->name}}",
+                    slug: "{{$tag->slug}}",
+
 
                 }),
 
             },
             watch:{
-                'form.title':function (val,nval)
+                'form.name':function (val,nval)
                 {
                     this.form.slug = this.sanitizeTitle(nval);
                 }
@@ -185,10 +127,11 @@
                 submit() {
                     if(this.form.slug == "")
                     {
-                        this.form.slug = this.sanitizeTitle(this.form.title);
+                        this.form.slug = this.sanitizeTitle(this.form.name);
                     }
-                    this.form.submit('post', '/admin/category')
+                    this.form.submit('post', '/admin/tag')
                         .then(response =>
+
 
                                 Swal.fire(
                                     'ثبت شد!',
@@ -203,20 +146,11 @@
                             'اطلاعات به درستی ثبت نشد.',
                             'warning'
                         ));
-                    this.form.title ="";
                     this.form.slug ="";
+                    this.form.name ="";
                 },
             }
         });
-        @if($category->is_active == true)
-        $('#myCheckbox').prop('checked', true);
-        @else
-        $('#myCheckbox').prop('checked', false);
-        @endif
-
-
-
-
     </script>
     <script src="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
 

@@ -30,3 +30,7 @@ Route::get('/admin/blog', function () {
 /* category*/
 Route::resource('/admin/category', 'CategoryController');
 Route::get('/admin/categories', 'CategoryController@categories');
+
+/* tag*/
+Route::resource('/admin/tag', 'TagController');
+Route::get('/admin/tags', 'TagController@tags');
