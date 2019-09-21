@@ -51,15 +51,11 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="slug"
-                                                       class="col-md-4 col-form-label text-md-right">slug</label>
+                                                <label for="slug" class="col-md-4 col-form-label text-md-right">slug</label>
 
                                                 <div class="col-md-8">
-                                                    <input placeholder="ex : the-last-industrial-exhibition-in-tehran"
-                                                           id="slug" type="text" class="form-control " name="slug"
-                                                           v-bind:class="getClass(form.errors.has('slug'))"
-                                                           autocomplete="slug"
-                                                           v-model="slug" autofocus>
+                                                    <input id="slug" type="text" class="form-control " name="slug"  v-bind:class="getClass(form.errors.has('slug'))"
+                                                           autocomplete="slug" v-model="form.slug" autofocus>
                                                     <div class="invalid-feedback " v-show="form.errors.has('slug')">
                                                         <strong>@{{ form.errors.get('slug') }}</strong>
                                                     </div>
@@ -74,7 +70,7 @@
                                             <span class="input-group-text">آپلود عکس</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input v-on:change="onImageChange" type="file" class="custom-file-input" id="inputGroupFile01">
+                                            <input @change="onImageChange()" ref="file"  type="file" class="custom-file-input" id="inputGroupFile01">
                                             <label class="custom-file-label" for="inputGroupFile01">عکس را انتخاب کنید</label>
                                         </div>
                                     </div>
@@ -131,17 +127,20 @@
                     title: "",
                     slug: "",
                     page:"",
-                    image:""
+                    image:"",
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }),
 
             },
-            computed: {
-                slug() {
-                    this.form.slug = this.sanitizeTitle(this.form.title);
-                    return this.form.slug;
-
+            watch:{
+                'form.title':function (val,nval)
+                {
+                    this.form.slug = this.sanitizeTitle(nval);
                 }
             },
+
             methods: {
                 getClass(input) {
                     if (input) {
@@ -152,8 +151,12 @@
                 },
 
                 submit() {
+                    if(this.form.slug == "")
+                    {
+                        this.form.slug = this.sanitizeTitle(this.form.name);
+                    }
                     this.form.content = CKEDITOR.instances.editor.getData();
-                    this.form.submit('post', '/admin/register')
+                    this.form.submit('post', '/admin/blog')
                         .then(response =>
 
                             Swal.fire(
@@ -190,8 +193,33 @@
                     return slug;
                 },
                 onImageChange(e) {
-                    this.form.image = e.target.files[0];
+                    console.log("salam");
+                    this.form.image = this.$refs.file.files[0];
+
+                    this.mahdi();
+
                     },
+                mahdi(){
+                    let formData = new FormData();
+                    formData.append('image', this.$refs.file.files[0]);
+
+                    console.log("salam1");
+
+                    axios.post('/admin/blog',
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        }
+                    ).then(function(data){
+                        console.log(data.data);
+                    })
+                        .catch(function(){
+                            console.log('FAILURE!!');
+                        });
+
+                }
 
             }
         });

@@ -23,14 +23,13 @@ Route::get('/admin', function () {
 Route::resource('/admin/register', 'RegistrationController');
 Route::get('/admin/users', 'RegistrationController@users');
 
-Route::get('/admin/blog', function () {
-    return view('admin.blog.index');
-});
 
 /* category*/
 Route::resource('/admin/category', 'CategoryController');
 Route::get('/admin/categories', 'CategoryController@categories');
-
 /* tag*/
 Route::resource('/admin/tag', 'TagController');
 Route::get('/admin/tags', 'TagController@tags');
+
+/*Blog*/
+Route::resource('/admin/blog', 'BlogController');
