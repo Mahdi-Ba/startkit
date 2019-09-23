@@ -35,6 +35,7 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
 
         $path = Storage::put('/public/shares/blog',$request->file('image'));
        dd($path);

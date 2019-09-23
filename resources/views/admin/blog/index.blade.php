@@ -5,56 +5,7 @@
           href="/admin_template/assets/libs/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <link rel="stylesheet" type="text/css" href="/admin_template/assets/libs/ckeditor/samples/css/samples.css">
     <link href="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-        <style>
 
-        .files input {
-
-            outline: 2px dashed #92b0b3;
-            outline-offset: -10px;
-            -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-            transition: outline-offset .15s ease-in-out, background-color .15s linear;
-            padding: 100px 100px 100px 35%;
-            text-align: center !important;
-            margin: 0;
-            width: 100% !important;
-
-        }
-        .files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
-            -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-            transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
-        }
-        .files{ position:relative}
-        .files:after {  pointer-events: none;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 50px;
-            right: 0;
-            height: 56px;
-            content: "";
-            background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
-            display: block;
-            margin: 0 auto;
-            background-size: 100%;
-            background-repeat: no-repeat;
-        }
-        .color input{ background-color:#f1f1f1;}
-        .files:before {
-            position: absolute;
-            bottom: 10px;
-            left: 0;  pointer-events: none;
-            width: 100%;
-            right: 0;
-            height: 57px;
-            content: " عکس را بکشید و رها کنید ";
-            display: block;
-            margin: 0 auto;
-            color: #2ea591;
-            font-weight: 600;
-            text-transform: capitalize;
-            text-align: center;
-        }
-    </style>
 
     <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
     <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
@@ -117,44 +68,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <div class=" files color">
-                                                    <label>عکس را انتخاب کنید </label>
-                                                    <input  @change="onImageChange()" ref="file"   type="file" class="form-control" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <image-component image-name="picture"></image-component>
 
-                                    <example-component></example-component>
-                                    <multiselect
-                                        v-model="value"
-                                        :options="options"
-                                        :close-on-select="false"
-                                        :clear-on-select="false"
-                                        :hide-selected="true"
-                                        :preserve-search="true"
-                                        placeholder="Pick some"
-                                        label="name"
-                                        track-by="name"
-                                        :preselect-first="true"
-                                        id="example"
-                                        @select="onSelect"
-                                    >
-                                    </multiselect>
+                                    <category-component></category-component>
 
-
-
-                                    <select v-model="form.page" class="select2 form-control custom-select mb-5" style="width: 100%; height:36px;">
-                                        <option>انتخاب کنید</option>
-                                        <optgroup label="نمایش در صفحه">
-                                            <option value="0">مقاله</option>
-                                            <option value="1">اخبار</option>
-                                        </optgroup>
-
-                                    </select>
 
 
 
@@ -190,30 +107,20 @@
     <script src="/admin_template/assets/libs/ckeditor/ckeditor.js"></script>
     <script src="/admin_template/assets/libs/ckeditor/samples/js/sample.js"></script>
     <script>
-        new Vue({
-            components: {
-                Multiselect: window.VueMultiselect.default
-            },
+        var blog =new Vue({
+
             el: '#app',
             data: {
                 form: new Form({
                     content: "",
                     title: "",
                     slug: "",
-                    page:"",
+                    category:"",
                     image:"",
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 }),
-                value: '',
-                options: [
-                    { name: 'Vue.js', language: 'JavaScript' },
-                    { name: 'Rails', language: 'Ruby' },
-                    { name: 'Sinatra', language: 'Ruby' },
-                    { name: 'Laravel', language: 'PHP', $isDisabled: true }
-                ]
-
             },
             watch:{
                 'form.title':function (val,nval)
@@ -221,7 +128,6 @@
                     this.form.slug = this.sanitizeTitle(nval);
                 }
             },
-
             methods: {
                 getClass(input) {
                     if (input) {
@@ -230,16 +136,17 @@
                         return ''
                     }
                 },
-
                 submit() {
                     if(this.form.slug == "")
                     {
                         this.form.slug = this.sanitizeTitle(this.form.name);
                     }
                     let formData = new FormData();
-                    formData.append('image', this.$refs.file.files[0]);
-                    formData.append('slug', this.form.slug);
                     formData.append('title', this.form.title);
+                    formData.append('slug', this.form.slug);
+                    formData.append('image', this.form.image);
+                    formData.append('category', this.form.category);
+                    formData.append('content', CKEDITOR.instances.editor.getData());
 
                     axios.post('/admin/blog',
                         formData,
@@ -254,11 +161,7 @@
                         .catch(function(){
                             console.log('FAILURE!!');
                         });
-          /*          if(this.form.slug == "")
-                    {
-                        this.form.slug = this.sanitizeTitle(this.form.name);
-                    }
-                    this.form.content = CKEDITOR.instances.editor.getData();
+          /*
                     this.form.submit('post', '/admin/blog')
                         .then(response =>
 
@@ -295,11 +198,16 @@
 
                     return slug;
                 },
-                onImageChange(e) {
-                    this.form.image = this.$refs.file.files[0];
-                    },
+
 
             }
+        });
+        blog.$on('category', function(value) {
+            console.log(value);
+            this.form.category = value.key;
+        });
+        blog.$on('image', function(value) {
+            this.form.image = value.imageFile;
         });
         var options = {
             filebrowserImageBrowseUrl: '/admin/laravel-filemanager?type=Images',
