@@ -1,23 +1,24 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <h1>Vue JS MultiSelect Dropdown Example - ItSolutionStuff.com</h1>
+        <multiselect
+            v-model="selected"
+            :multiple="true"
+            :options="options">
+        </multiselect>
     </div>
 </template>
 
 <script>
+    import Multiselect from 'vue-multiselect'
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        components: { Multiselect },
+        data () {
+            return {
+                selected: null,
+                options: ['Laravel', 'Laravel 5', 'Vue JS', 'ItSolutionStuff.com', 'HDTuto.com']
+            }
         }
     }
 </script>
+

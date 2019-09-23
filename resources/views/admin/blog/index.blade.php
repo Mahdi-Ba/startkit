@@ -5,7 +5,7 @@
           href="/admin_template/assets/libs/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <link rel="stylesheet" type="text/css" href="/admin_template/assets/libs/ckeditor/samples/css/samples.css">
     <link href="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <style>
+        <style>
 
         .files input {
 
@@ -55,6 +55,9 @@
             text-align: center;
         }
     </style>
+
+    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 
 @endsection
 
@@ -125,11 +128,22 @@
                                         </div>
                                     </div>
 
-
-
-
-
-
+                                    <example-component></example-component>
+                                    <multiselect
+                                        v-model="value"
+                                        :options="options"
+                                        :close-on-select="false"
+                                        :clear-on-select="false"
+                                        :hide-selected="true"
+                                        :preserve-search="true"
+                                        placeholder="Pick some"
+                                        label="name"
+                                        track-by="name"
+                                        :preselect-first="true"
+                                        id="example"
+                                        @select="onSelect"
+                                    >
+                                    </multiselect>
 
 
 
@@ -177,6 +191,9 @@
     <script src="/admin_template/assets/libs/ckeditor/samples/js/sample.js"></script>
     <script>
         new Vue({
+            components: {
+                Multiselect: window.VueMultiselect.default
+            },
             el: '#app',
             data: {
                 form: new Form({
@@ -189,6 +206,13 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }),
+                value: '',
+                options: [
+                    { name: 'Vue.js', language: 'JavaScript' },
+                    { name: 'Rails', language: 'Ruby' },
+                    { name: 'Sinatra', language: 'Ruby' },
+                    { name: 'Laravel', language: 'PHP', $isDisabled: true }
+                ]
 
             },
             watch:{
