@@ -29,6 +29,16 @@ class TagController extends Controller
         return response()->json($tag);
     }
 
+    public function selectTags(Request $request)
+    {
+
+        $tag = Tag::query();
+        if ($request->filled('title'))
+            $tag->where('name->fa','like', '%'.$request->title.'%');
+        $tag = $tag->latest()->limit(100)->get(['id','name']);
+        return response()->json($tag);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

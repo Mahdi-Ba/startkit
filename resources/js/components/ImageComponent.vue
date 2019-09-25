@@ -2,10 +2,16 @@
     <div class="row">
         <div class="col">
             <div class="form-group">
+                <a v-show="imageUrl" @click="deleteImg(imageUrl)" class="btn btn-outline-danger" href="#">حذف<i
+                    class="ti-trash"></i></a>
+                <img v-show="imageUrl" width="100" height="100" :src="'\/'+imageUrl">
                 <div class=" files color">
-                    <label>عکس را انتخاب کنید </label>
+                    <label v-show="!imageUrl" class="text-warning" >هنوز تصویری آپلود نشده است.لطفا عکس را انتخاب کنید </label>
+                    <label v-show="imageUrl" class="text-success" >تصویر  با موفقیت آپلود شد </label>
                     <input  @change="onImageChange()" ref="file"   type="file" class="form-control" >
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -70,6 +76,8 @@
             return {
                 imageTitle:"",
                 imageFile:null,
+                imageUrl:"",
+                status:""
             }
         },
         mounted()
@@ -78,9 +86,34 @@
         },
         methods: {
             onImageChange() {
-                this.imageFile = this.$refs.file.files[0];
+                let formData = new FormData();
+                formData.append('image', this.$refs.file.files[0]);
+                formData.append('address', "/files/shares/blog");
+                axios.post('/admin/image',
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                ).then(data =>{
+                    this.imageUrl = data.data.path;
+                })
+                    .catch(function(){
+                        console.log('FAILURE!!');
+                    });
                 this.$parent.$emit('image', this.$data);
             },
+            deleteImg(imgPath){
+                axios.post('/admin/image/deleted' , {img_url:imgPath})
+                    .then(response =>{
+                        this.imageFile = '';
+                        this.imageUrl = '';
+                        this.$parent.$emit('image', this.$data);
+                    });
+
+            },
+
         }
     }
 </script>

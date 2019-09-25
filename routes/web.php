@@ -27,9 +27,16 @@ Route::get('/admin/users', 'RegistrationController@users');
 /* category*/
 Route::resource('/admin/category', 'CategoryController');
 Route::get('/admin/categories', 'CategoryController@categories');
+Route::get('/admin/select_categories', 'CategoryController@selectCategories');
 /* tag*/
 Route::resource('/admin/tag', 'TagController');
 Route::get('/admin/tags', 'TagController@tags');
+Route::get('/admin/select_tags', 'TagController@selectTags');
 
 /*Blog*/
 Route::resource('/admin/blog', 'BlogController');
+
+
+Route::post('/admin/image', 'ImageController@store');
+Route::post('/admin/image/deleted','ImageController@destroy');
+

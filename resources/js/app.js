@@ -4,16 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 window.moment = require('moment');
 moment.locale('fa');
-import {Form} from './form'
+import {Form} from './Utils/form'
 window.Form =  Form;
-import {Errors} from './errors'
+import {Errors} from './Utils/errors'
 window.Errors = Errors;
 window.Vue = require('vue');
-
-
+import {sanitizeTitle} from "./Utils/helper";
+window.sanitizeTitle = sanitizeTitle;
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,6 +28,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('category-component', require('./components/CategoryComponent.vue').default);
+Vue.component('tag-component', require('./components/TagComponent.vue').default);
 Vue.component('image-component', require('./components/ImageComponent.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
 

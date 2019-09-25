@@ -25,6 +25,15 @@ class CategoryController extends Controller
         $categories = $categories->latest()->paginate(8);
         return response()->json($categories);
     }
+    public function selectCategories(Request $request)
+    {
+
+        $categories = Category::query();
+        if ($request->filled('title'))
+            $categories->where('title', 'like', '%' . $request->title . '%');
+     $categories = $categories->latest()->where('is_active','=',1)->limit(100)->get(['id','title']);
+        return response()->json($categories);
+    }
 
     public function create()
     {
