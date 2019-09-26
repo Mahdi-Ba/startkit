@@ -20,17 +20,19 @@ class ImageController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'address' =>'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'required|image|mimes:jpeg,jpg,gif,png,svg|max:2048',
 
         ]);
-
+        $images = $request->file('images');
         if ($validator->fails()) {
             return Response($validator->errors(), 400);
         }
-
-        $path = Storage::disk('public')->put($request->address,$request->file('image'));
-
-        return response(['path' =>$path],200);
+        $path =[];
+        foreach ($images as $img)
+        {
+            $path[] = Storage::disk('public')->put($request->address,$img);
+        }
+        return response($path,200);
     }
 
 

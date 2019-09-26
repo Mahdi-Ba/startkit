@@ -1869,19 +1869,28 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
+  props: {
+    'callbackFunction': String,
+    'editable': Object
+  },
+  mounted: function mounted() {
+    this.selected = this.editable;
+    this.callback_function = this.callbackFunction;
+  },
 
   /*    components: {
           /!*      Multiselect: window.VueMultiselect.default*!/
       },*/
   data: function data() {
     return {
+      callback_function: "",
       selected: "",
       options: []
     };
   },
   methods: {
-    onSelect: function onSelect(option, id) {
-      this.$parent.$emit('category', this.selected);
+    onInput: function onInput(value, id) {
+      this.$parent.$emit(this.callback_function, value);
     },
     asyncFind: function asyncFind(query) {
       var _this = this;
@@ -1975,49 +1984,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    'imageName': String
+    'editable': Array,
+    'callbackFunction': String,
+    'multiple': String
   },
   data: function data() {
     return {
-      imageTitle: "",
+      callback_function: "",
       imageFile: null,
-      imageUrl: "",
+      imageUrl: null,
+      multiple_data: '',
       status: ""
     };
   },
   mounted: function mounted() {
-    this.imageTitle = this.imageName;
+    this.imageUrl = this.editable;
+    this.callback_function = this.callbackFunction;
+    this.multiple_data = this.multiple;
   },
   methods: {
     onImageChange: function onImageChange() {
       var _this = this;
 
       var formData = new FormData();
-      formData.append('image', this.$refs.file.files[0]);
+      var i = 0;
+      var images = [];
+
+      while (i < this.$refs.file.files.length) {
+        images.push(this.$refs.file.files[i]);
+        i += 1;
+      }
+
+      for (var _i = 0; _i < images.length; _i++) {
+        formData.append('images[]', images[_i]);
+      }
+
       formData.append('address', "/files/shares/blog");
       axios.post('/admin/image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (data) {
-        _this.imageUrl = data.data.path;
+        _this.pushMethod(data.data);
       })["catch"](function () {
         console.log('FAILURE!!');
       });
-      this.$parent.$emit('image', this.$data);
     },
-    deleteImg: function deleteImg(imgPath) {
+    pushMethod: function pushMethod(data) {
+      this.imageUrl = data.concat(this.imageUrl);
+      this.$parent.$emit(this.callback_function, this.imageUrl);
+    },
+    deleteImg: function deleteImg(imgPath, index) {
       var _this2 = this;
 
       axios.post('/admin/image/deleted', {
         img_url: imgPath
       }).then(function (response) {
         _this2.imageFile = '';
-        _this2.imageUrl = '';
 
-        _this2.$parent.$emit('image', _this2.$data);
+        _this2.imageUrl.splice(index, 1);
+
+        _this2.$parent.$emit(_this2.callback_function, _this2.imageUrl);
       });
     }
   }
@@ -2061,19 +2107,28 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
   },
+  props: {
+    'callbackFunction': String,
+    'editable': Array
+  },
+  mounted: function mounted() {
+    this.selected = this.editable;
+    this.callback_function = this.callbackFunction;
+  },
 
   /*    components: {
           /!*      Multiselect: window.VueMultiselect.default*!/
       },*/
   data: function data() {
     return {
-      selected: "",
+      callback_function: "",
+      selected: [],
       options: []
     };
   },
   methods: {
-    onSelect: function onSelect(option, id) {
-      this.$parent.$emit('category', this.selected);
+    onInput: function onInput(value, id) {
+      this.$parent.$emit(this.callback_function, value);
     },
     limitText: function limitText(count) {
       return "  \u0648".concat(count, " \u062A\u0639\u062F\u0627\u062F \u0628\u0627\u0642\u06CC \u062A\u06AF \u0647\u0627\u06CC \u0627\u0646\u062A\u062E\u0627\u0628 \u0634\u062F\u0647");
@@ -2088,8 +2143,6 @@ __webpack_require__.r(__webpack_exports__);
             name: data.name.fa
           };
         });
-        console.log(_this.options);
-        /*   this.options = response.data*/
       });
     },
     clearAll: function clearAll() {
@@ -2112,7 +2165,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.files input {\n\n    outline: 2px dashed #92b0b3;\n    outline-offset: -10px;\n    transition: outline-offset .15s ease-in-out, background-color .15s linear;\n    padding: 100px 100px 100px 35%;\n    text-align: center !important;\n    margin: 0;\n    width: 100% !important;\n}\n.files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;\n    transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;\n}\n.files{ position:relative}\n.files:after {  pointer-events: none;\n    position: absolute;\n    top: 60px;\n    left: 0;\n    width: 50px;\n    right: 0;\n    height: 56px;\n    content: \"\";\n    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);\n    display: block;\n    margin: 0 auto;\n    background-size: 100%;\n    background-repeat: no-repeat;\n}\n.color input{ background-color:#f1f1f1;}\n.files:before {\n    position: absolute;\n    bottom: 10px;\n    left: 0;  pointer-events: none;\n    width: 100%;\n    right: 0;\n    height: 57px;\n    content: \" \\639\\6A9\\633   \\631\\627   \\628\\6A9\\634\\6CC\\62F   \\648   \\631\\647\\627   \\6A9\\646\\6CC\\62F   \";\n    display: block;\n    margin: 0 auto;\n    color: #2ea591;\n    font-weight: 600;\n    text-transform: capitalize;\n    text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.files input {\n\n    outline: 2px dashed #92b0b3;\n    outline-offset: -10px;\n    transition: outline-offset .15s ease-in-out, background-color .15s linear;\n    padding: 100px 100px 100px 35%;\n    text-align: center !important;\n    margin: 0;\n    width: 100% !important;\n}\n.files input:focus {\n    outline: 2px dashed #92b0b3;\n    outline-offset: -10px;\n    transition: outline-offset .15s ease-in-out, background-color .15s linear;\n    border: 1px solid #92b0b3;\n}\n.files {\n    position: relative\n}\n.files:after {\n    pointer-events: none;\n    position: absolute;\n    top: 60px;\n    left: 0;\n    width: 50px;\n    right: 0;\n    height: 56px;\n    content: \"\";\n    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);\n    display: block;\n    margin: 0 auto;\n    background-size: 100%;\n    background-repeat: no-repeat;\n}\n.color input {\n    background-color: #f1f1f1;\n}\n.files:before {\n    position: absolute;\n    bottom: 10px;\n    left: 0;\n    pointer-events: none;\n    width: 100%;\n    right: 0;\n    height: 57px;\n    content: \" \\639\\6A9\\633   \\631\\627   \\628\\6A9\\634\\6CC\\62F   \\648   \\631\\647\\627   \\6A9\\646\\6CC\\62F   \";\n    display: block;\n    margin: 0 auto;\n    color: #2ea591;\n    font-weight: 600;\n    text-transform: capitalize;\n    text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -52594,7 +52647,7 @@ var render = function() {
             "internal-search": false,
             options: _vm.options
           },
-          on: { select: _vm.onSelect, "search-change": _vm.asyncFind },
+          on: { input: _vm.onInput, "search-change": _vm.asyncFind },
           model: {
             value: _vm.selected,
             callback: function($$v) {
@@ -52632,44 +52685,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c(
-          "a",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.imageUrl,
-                expression: "imageUrl"
-              }
-            ],
-            staticClass: "btn btn-outline-danger",
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                return _vm.deleteImg(_vm.imageUrl)
-              }
-            }
-          },
-          [_vm._v("حذف"), _c("i", { staticClass: "ti-trash" })]
-        ),
-        _vm._v(" "),
-        _c("img", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.imageUrl,
-              expression: "imageUrl"
-            }
-          ],
-          attrs: { width: "100", height: "100", src: "/" + _vm.imageUrl }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: " files color" }, [
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
           _c(
-            "label",
+            "p",
             {
               directives: [
                 {
@@ -52681,37 +52702,82 @@ var render = function() {
               ],
               staticClass: "text-warning"
             },
-            [_vm._v("هنوز تصویری آپلود نشده است.لطفا عکس را انتخاب کنید ")]
+            [
+              _vm._v(
+                "هنوز تصویری آپلود نشده است.لطفا عکس را انتخاب\n                کنید "
+              )
+            ]
           ),
           _vm._v(" "),
-          _c(
-            "label",
-            {
-              directives: [
+          _vm._l(_vm.imageUrl, function(img, index) {
+            return _c("div", [
+              _c(
+                "a",
                 {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.imageUrl,
-                  expression: "imageUrl"
-                }
-              ],
-              staticClass: "text-success"
-            },
-            [_vm._v("تصویر  با موفقیت آپلود شد ")]
-          ),
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: img,
+                      expression: "img"
+                    }
+                  ],
+                  staticClass: "btn btn-outline-danger ",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteImg(img, index)
+                    }
+                  }
+                },
+                [_vm._v("حذف"), _c("i", { staticClass: "ti-trash" })]
+              ),
+              _vm._v(" "),
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: img,
+                    expression: "img"
+                  }
+                ],
+                attrs: { width: "100", height: "100", src: "/" + img }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: img,
+                      expression: "img"
+                    }
+                  ],
+                  staticClass: "text-success"
+                },
+                [_vm._v("تصویر با موفقیت آپلود شد ")]
+              )
+            ])
+          }),
           _vm._v(" "),
-          _c("input", {
-            ref: "file",
-            staticClass: "form-control",
-            attrs: { type: "file" },
-            on: {
-              change: function($event) {
-                return _vm.onImageChange()
+          _c("div", { staticClass: " files color" }, [
+            _c("input", {
+              ref: "file",
+              staticClass: "form-control",
+              attrs: { multiple: _vm.multiple_data, type: "file" },
+              on: {
+                change: function($event) {
+                  return _vm.onImageChange()
+                }
               }
-            }
-          })
-        ])
-      ])
+            })
+          ])
+        ],
+        2
+      )
     ])
   ])
 }
@@ -52753,7 +52819,6 @@ var render = function() {
               label: "name",
               "track-by": "id",
               placeholder: "Type to search",
-              "open-direction": "bottom",
               options: _vm.options,
               multiple: true,
               searchable: true,
@@ -52766,7 +52831,7 @@ var render = function() {
               "show-no-results": false,
               "hide-selected": true
             },
-            on: { select: _vm.onSelect, "search-change": _vm.asyncFind },
+            on: { input: _vm.onInput, "search-change": _vm.asyncFind },
             model: {
               value: _vm.selected,
               callback: function($$v) {

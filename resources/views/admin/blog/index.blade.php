@@ -55,10 +55,12 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="slug" class="col-md-4 col-form-label text-md-right">slug</label>
+                                                <label for="slug"
+                                                       class="col-md-4 col-form-label text-md-right">slug</label>
 
                                                 <div class="col-md-8">
-                                                    <input id="slug" type="text" class="form-control " name="slug"  v-bind:class="getClass(form.errors.has('slug'))"
+                                                    <input id="slug" type="text" class="form-control " name="slug"
+                                                           v-bind:class="getClass(form.errors.has('slug'))"
                                                            autocomplete="slug" v-model="form.slug" autofocus>
                                                     <div class="invalid-feedback " v-show="form.errors.has('slug')">
                                                         <strong>@{{ form.errors.get('slug') }}</strong>
@@ -68,18 +70,16 @@
                                         </div>
                                     </div>
 
-                                    <image-component image-name="picture"></image-component>
+                                    <image-component :editable="[]" multiple
+                                                     callback-function="picture"></image-component>
                                     <div class="row">
-                                        <category-component></category-component>
-                                        <tag-component></tag-component>
+                                        <category-component :editable="{ id: '334', title: 'de' }"
+                                                            callback-function="category"></category-component>
+                                        <tag-component :editable="[de]" callback-function="tag"></tag-component>
                                     </div>
 
 
-
-
-
-
-                                    <textarea  id="editor">
+                                    <textarea id="editor">
                                                  <h1>محل ایجاد محتوا ...</h1>
                                     </textarea>
                                     <div class="form-group row mt-5 mb-0">
@@ -110,7 +110,7 @@
     <script src="/admin_template/assets/libs/ckeditor/ckeditor.js"></script>
     <script src="/admin_template/assets/libs/ckeditor/samples/js/sample.js"></script>
     <script>
-        var blog =new Vue({
+        var blog = new Vue({
 
             el: '#app',
             data: {
@@ -118,16 +118,13 @@
                     content: "",
                     title: "",
                     slug: "",
-                    category:"",
-                    image:"",
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
+                    category: 334,
+                    tag: [],
+                    images: [],
                 }),
             },
-            watch:{
-                'form.title':function (val,nval)
-                {
+            watch: {
+                'form.title': function (val, nval) {
                     this.form.slug = sanitizeTitle(nval);
                 }
             },
@@ -140,57 +137,32 @@
                     }
                 },
                 submit() {
-                    if(this.form.slug == "")
-                    {
+                    if (this.form.slug == "") {
                         this.form.slug = sanitizeTitle(this.form.name);
                     }
                     let formData = new FormData();
-                    formData.append('title', this.form.title);
-                    formData.append('slug', this.form.slug);
-                    formData.append('image', this.form.image);
-                    formData.append('category', this.form.category);
+
                     formData.append('content', CKEDITOR.instances.editor.getData());
 
-                    axios.post('/admin/blog',
-                        formData,
-                        {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        }
-                    ).then(function(data){
-                        console.log(data.data);
-                    })
-                        .catch(function(){
-                            console.log('FAILURE!!');
-                        });
-          /*
-                    this.form.submit('post', '/admin/blog')
-                        .then(response =>
-
-                            Swal.fire(
-                                'ثبت شد!',
-                                'اطلاعات به درستی ثبت شد.',
-                                'success'
-                            )
-                        )
-                        .catch(e => Swal.fire(
-                            'ثبت نشد!',
-                            'اطلاعات به درستی ثبت نشد.',
-                            'warning'
-                        ));*/
                 },
-
 
 
             }
         });
-        blog.$on('category', function(value) {
-            console.log(value);
-            this.form.category = value.key;
+        blog.$on('category', function (value) {
+            this.form.category = value.id;
         });
-        blog.$on('image', function(value) {
-            this.form.image = value.imageFile;
+        blog.$on('tag', function (value) {
+            console.log(value);
+            this.form.tag = "";
+            this.form.tag = value.map(data => {
+                return data.name;
+            });
+
+        });
+        blog.$on('picture', function (value) {
+            this.form.images = value;
+
         });
         var options = {
             filebrowserImageBrowseUrl: '/admin/laravel-filemanager?type=Images',

@@ -2,13 +2,16 @@
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <a v-show="imageUrl" @click="deleteImg(imageUrl)" class="btn btn-outline-danger" href="#">حذف<i
-                    class="ti-trash"></i></a>
-                <img v-show="imageUrl" width="100" height="100" :src="'\/'+imageUrl">
+                <p v-show="!imageUrl" class="text-warning">هنوز تصویری آپلود نشده است.لطفا عکس را انتخاب
+                    کنید </p>
+                <div v-for="(img , index) in imageUrl">
+                    <a v-show="img" @click="deleteImg(img,index)" class="btn btn-outline-danger " href="#">حذف<i
+                        class="ti-trash"></i></a>
+                    <img v-show="img" width="100" height="100" :src="'\/'+img">
+                    <label v-show="img" class="text-success">تصویر با موفقیت آپلود شد </label>
+                </div>
                 <div class=" files color">
-                    <label v-show="!imageUrl" class="text-warning" >هنوز تصویری آپلود نشده است.لطفا عکس را انتخاب کنید </label>
-                    <label v-show="imageUrl" class="text-success" >تصویر  با موفقیت آپلود شد </label>
-                    <input  @change="onImageChange()" ref="file"   type="file" class="form-control" >
+                    <input :multiple="multiple_data" @change="onImageChange()" ref="file" type="file" class="form-control">
                 </div>
 
 
@@ -30,12 +33,21 @@
         width: 100% !important;
 
     }
-    .files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
+
+    .files input:focus {
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
         -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-        transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        border: 1px solid #92b0b3;
     }
-    .files{ position:relative}
-    .files:after {  pointer-events: none;
+
+    .files {
+        position: relative
+    }
+
+    .files:after {
+        pointer-events: none;
         position: absolute;
         top: 60px;
         left: 0;
@@ -49,11 +61,16 @@
         background-size: 100%;
         background-repeat: no-repeat;
     }
-    .color input{ background-color:#f1f1f1;}
+
+    .color input {
+        background-color: #f1f1f1;
+    }
+
     .files:before {
         position: absolute;
         bottom: 10px;
-        left: 0;  pointer-events: none;
+        left: 0;
+        pointer-events: none;
         width: 100%;
         right: 0;
         height: 57px;
@@ -70,46 +87,70 @@
 
 
     export default {
-        props: {'imageName':String},
+        props: {
+            'editable':Array,
+            'callbackFunction': String,
+            'multiple': String,
+        },
 
         data() {
             return {
-                imageTitle:"",
-                imageFile:null,
-                imageUrl:"",
-                status:""
+                callback_function: "",
+                imageFile: null,
+                imageUrl: null,
+                multiple_data: '',
+                status: ""
             }
         },
-        mounted()
-        {
-            this.imageTitle = this.imageName;
+        mounted() {
+            this.imageUrl = this.editable;
+            this.callback_function = this.callbackFunction;
+            this.multiple_data = this.multiple;
         },
         methods: {
             onImageChange() {
                 let formData = new FormData();
-                formData.append('image', this.$refs.file.files[0]);
+                let i = 0;
+                let images = [];
+                while (i < this.$refs.file.files.length) {
+                    images.push(this.$refs.file.files[i]);
+                    i += 1;
+                }
+                for (let i = 0; i < images.length; i++) {
+                    formData.append('images[]', images[i]);
+                }
+
                 formData.append('address', "/files/shares/blog");
+
                 axios.post('/admin/image',
                     formData,
                     {
                         headers: {
-                            'Content-Type': 'multipart/form-data'
+                            'Content-Type': 'multipart/form-data',
                         }
                     }
-                ).then(data =>{
-                    this.imageUrl = data.data.path;
+                ).then(data => {
+
+                    this.pushMethod(data.data)
+
+
                 })
-                    .catch(function(){
+                    .catch(function () {
                         console.log('FAILURE!!');
                     });
-                this.$parent.$emit('image', this.$data);
+
             },
-            deleteImg(imgPath){
-                axios.post('/admin/image/deleted' , {img_url:imgPath})
-                    .then(response =>{
+            pushMethod(data)
+            {
+                this.imageUrl=data.concat(this.imageUrl);
+                this.$parent.$emit(this.callback_function, this.imageUrl);
+            },
+            deleteImg(imgPath, index) {
+                axios.post('/admin/image/deleted', {img_url: imgPath})
+                    .then(response => {
                         this.imageFile = '';
-                        this.imageUrl = '';
-                        this.$parent.$emit('image', this.$data);
+                        this.imageUrl.splice(index, 1);
+                        this.$parent.$emit(this.callback_function, this.imageUrl);
                     });
 
             },

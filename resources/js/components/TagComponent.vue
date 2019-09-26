@@ -5,8 +5,8 @@
                 <label class="col-md-4 col-form-label text-md-right">تگ ها</label>
 
                 <multiselect v-model="selected"  label="name" track-by="id"
-                             placeholder="Type to search" open-direction="bottom" :options="options" :multiple="true"
-                             @select="onSelect"
+                             placeholder="Type to search"  :options="options" :multiple="true"
+                             @input="onInput"
                              :searchable="true" :internal-search="false" :clear-on-select="false"
                              :close-on-select="false" :options-limit="300" :limit="4" :limit-text="limitText"
                              :show-no-results="false" :hide-selected="true"
@@ -23,18 +23,27 @@
 
     export default {
         components: {Multiselect},
+        props: {
+            'callbackFunction': String,
+            'editable':Array,
+        },
+        mounted() {
+            this.selected = this.editable;
+            this.callback_function = this.callbackFunction;
+        },
         /*    components: {
                 /!*      Multiselect: window.VueMultiselect.default*!/
             },*/
         data() {
             return {
-                selected: "",
-                options: []
+                callback_function: "",
+                selected: [],
+                options: [],
             }
         },
         methods: {
-            onSelect(option, id) {
-                this.$parent.$emit('category', this.selected);
+            onInput(value, id) {
+                this.$parent.$emit(this.callback_function, value);
             },
             limitText(count) {
                 return `  و${count} تعداد باقی تگ های انتخاب شده`
@@ -45,8 +54,6 @@
                         this.options = response.data.map(data => {
                             return {id:data.id,name:data.name.fa}
                         });
-                        console.log(  this.options );
-                     /*   this.options = response.data*/
                     });
 
             },

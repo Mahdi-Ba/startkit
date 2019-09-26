@@ -13,7 +13,7 @@
                        v-model="selected"
                        :multiple="false"
                        :searchable="true"  :internal-search="false"
-                       @select="onSelect"
+                       @input="onInput"
                        @search-change="asyncFind"
                        :options="options">
                    </multiselect>
@@ -27,19 +27,28 @@
 
     export default {
         components: {Multiselect},
+        props: {
+            'callbackFunction': String,
+            'editable':Object,
+        },
+        mounted() {
+            this.selected = this.editable;
+            this.callback_function = this.callbackFunction;
+        },
         /*    components: {
                 /!*      Multiselect: window.VueMultiselect.default*!/
             },*/
         data() {
             return {
+                callback_function: "",
                 selected: "",
                 options: [
                 ]
             }
         },
         methods: {
-            onSelect(option, id) {
-                this.$parent.$emit('category', this.selected);
+            onInput(value, id) {
+                this.$parent.$emit(this.callback_function, value);
             },
             asyncFind(query) {
             axios.get('/admin/select_categories?title='+query)
