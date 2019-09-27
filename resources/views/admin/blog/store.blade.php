@@ -70,21 +70,48 @@
                                         </div>
                                     </div>
 
-                                    <image-component :editable="[]" multiple
-                                                     callback-function="picture"></image-component>
+                                    <image-component :editable="[]"
+                                                     {{-- multiple--}} callback-function="picture"></image-component>
+                                    <p style="font-size: 80%" class="text-danger" v-show="form.errors.has('img')">
+                                        @{{ form.errors.get('img') }}
+                                    </p>
                                     <div class="row">
-                                        <category-component :editable="{ id: '334', title: 'de' }"
-                                                            callback-function="category"></category-component>
-                                        <tag-component :editable="[de]" callback-function="tag"></tag-component>
+                                        <category-component
+                                            {{--:editable="{ id: 334, title: 'de' }"--}}callback-function="category"></category-component>
+
+                                        <tag-component
+                                            {{--:editable="[{ id: 48, name: 'Est.' }]"--}} callback-function="tag"></tag-component>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p style="font-size: 80%" class="text-danger"
+                                               v-show="form.errors.has('category_id')">
+                                                @{{ form.errors.get('category_id') }}
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <p style="font-size: 80%" class="text-danger"
+                                               v-show="form.errors.has('tag')">
+                                                @{{ form.errors.get('tag') }}
+                                            </p>
+                                        </div>
                                     </div>
 
 
                                     <textarea id="editor">
-                                                 <h1>محل ایجاد محتوا ...</h1>
+
                                     </textarea>
+
+                                    <p style="font-size: 80%" class="text-danger"
+                                       v-show="form.errors.has('content')">
+                                        @{{ form.errors.get('content') }}
+                                    </p>
+
                                     <div class="form-group row mt-5 mb-0">
                                         <div class="col-md-6 offset-md-4">
-                                            <button :disabled="form.errors.any()" type="submit" class="btn btn-primary">
+                                            <button {{--:disabled="form.errors.any()"--}} type="submit"
+                                                    class="btn btn-primary">
                                                 <i class="ti-save"></i>
                                                 ذخیره
                                             </button>
@@ -115,12 +142,19 @@
             el: '#app',
             data: {
                 form: new Form({
-                    content: "",
+                    id: "",
                     title: "",
                     slug: "",
-                    category: 334,
+                    content: "",
+                    /*
+                                        category: 334,
+                    */
+                    category_id: "",
+                    /*
+                                        tag: ['Est'],
+                    */
                     tag: [],
-                    images: [],
+                    img: "",
                 }),
             },
             watch: {
@@ -128,6 +162,17 @@
                     this.form.slug = sanitizeTitle(nval);
                 }
             },
+            mounted(){
+                if("{{$blog}}")
+                {
+                    alert("{{$blog}}");
+                }
+                else{
+                    alert("not")
+                }
+
+            },
+
             methods: {
                 getClass(input) {
                     if (input) {
@@ -140,17 +185,35 @@
                     if (this.form.slug == "") {
                         this.form.slug = sanitizeTitle(this.form.name);
                     }
-                    let formData = new FormData();
+                    this.form.content = CKEDITOR.instances.editor.getData();
+                    this.form.submit('post', '/admin/blog').then(response => {
+                            Swal.fire(
+                                'ثبت شد!',
+                                'اطلاعات به درستی ثبت شد.',
+                                'success'
+                            );
+                            this.changePage();
+                        }
+                    )
+                        .catch(e => {
+                            Swal.fire(
+                                'ثبت نشد!',
+                                'اطلاعات به درستی ثبت نشد.',
+                                'warning'
+                            )
+                        });
 
-                    formData.append('content', CKEDITOR.instances.editor.getData());
 
                 },
+                changePage() {
+                    window.location.href = '/admin/blog';
+                }
 
 
             }
         });
         blog.$on('category', function (value) {
-            this.form.category = value.id;
+            this.form.category_id = value.id;
         });
         blog.$on('tag', function (value) {
             console.log(value);
@@ -161,7 +224,7 @@
 
         });
         blog.$on('picture', function (value) {
-            this.form.images = value;
+            this.form.img = value[0];
 
         });
         var options = {

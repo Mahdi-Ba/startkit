@@ -97,7 +97,7 @@
             return {
                 callback_function: "",
                 imageFile: null,
-                imageUrl: null,
+                imageUrl: [],
                 multiple_data: '',
                 status: ""
             }

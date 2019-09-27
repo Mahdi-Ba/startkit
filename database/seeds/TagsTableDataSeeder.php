@@ -17,6 +17,14 @@ class TagsTableDataSeeder extends Seeder
      */
     public function run(Faker $faker,Request $request)
     {
+
+        for ($i=0; $i < 100; $i++) {
+            $tag = Tag::create([
+                'name' => $faker->text($maxNbChars = 6),
+                'slug' => ["fa" =>"سلام"]
+
+            ]);
+        }
  /*       $request['name']= "{\"fa\": \"مهدی\"}";
 
         $validator = Validator::make($request->all(), [
@@ -65,8 +73,8 @@ class TagsTableDataSeeder extends Seeder
        $tag->save();*/
 /*   $test = ['name' =>'علی']; */
 
-      $test = Tag::find(36)->toArray();
-      dd($test["slug"]);
+/*      $test = Tag::find(36)->toArray();
+      dd($test["slug"]);*/
 
 
 

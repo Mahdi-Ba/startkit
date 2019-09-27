@@ -20,4 +20,9 @@ class Category extends Model
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug')->doNotGenerateSlugsOnUpdate();
     }
+
+    public function blog()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }

@@ -49,7 +49,7 @@ class CategoryController extends Controller
             'title' => ['required','string','max:255',
                 Rule::unique('categories')->ignore($request->id),
             ],
-            'slug' => ['nullable','string', 'max:255',
+            'slug' => ['required','string', 'max:255',
                 Rule::unique('categories')->ignore($request->id),
             ],
             'is_active' => 'required|boolean',
