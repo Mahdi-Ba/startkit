@@ -28,8 +28,12 @@
             'editable':Array,
         },
         mounted() {
-            this.selected = this.editable;
             this.callback_function = this.callbackFunction;
+        },
+        watch: {
+            editable(newVal, oldVal) { // watch it
+                this.selected = newVal;
+            }
         },
         /*    components: {
                 /!*      Multiselect: window.VueMultiselect.default*!/

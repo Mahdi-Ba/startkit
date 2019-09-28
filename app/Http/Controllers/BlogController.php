@@ -17,10 +17,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $id=1;
-        $id="";
-
-        return view('admin.blog.store', ['blog' => $id]);
+        return view('admin.blog.store', ['blogId' => 3]);
     }
 
     /**
@@ -78,7 +75,8 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Blog::where('id', $id)->with(['category'])->with(['tags'])->get();
+        return response(['post'=>$post],200);
     }
 
     /**
@@ -89,7 +87,7 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.blog.store', ['blog' => $id]);
     }
 
     /**

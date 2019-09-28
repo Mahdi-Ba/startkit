@@ -147,7 +147,7 @@
 
             },
             watch:{
-                'form.title':function (val,nval)
+                'form.title':function (nval,val)
                 {
                     this.form.slug =sanitizeTitle(nval);
                 }

@@ -70,17 +70,17 @@
                                         </div>
                                     </div>
 
-                                    <image-component :editable="[]"
+                                    <image-component :editable="[form.img]"
                                                      {{-- multiple--}} callback-function="picture"></image-component>
                                     <p style="font-size: 80%" class="text-danger" v-show="form.errors.has('img')">
                                         @{{ form.errors.get('img') }}
                                     </p>
                                     <div class="row">
                                         <category-component
-                                            {{--:editable="{ id: 334, title: 'de' }"--}}callback-function="category"></category-component>
+                                           :editable="editableCategory" callback-function="category"></category-component>
 
                                         <tag-component
-                                            {{--:editable="[{ id: 48, name: 'Est.' }]"--}} callback-function="tag"></tag-component>
+                                            :editable="editableTags" callback-function="tag"></tag-component>
 
                                     </div>
                                     <div class="row">
@@ -99,8 +99,8 @@
                                     </div>
 
 
-                                    <textarea id="editor">
-
+                                    <textarea id="editor" >
+                                        @{{form.content}}
                                     </textarea>
 
                                     <p style="font-size: 80%" class="text-danger"
@@ -146,29 +146,51 @@
                     title: "",
                     slug: "",
                     content: "",
-                    /*
-                                        category: 334,
-                    */
                     category_id: "",
-                    /*
-                                        tag: ['Est'],
-                    */
                     tag: [],
                     img: "",
+                    updating:"false"
                 }),
+                editableCategory:{},
+                editableTags:[]
             },
             watch: {
-                'form.title': function (val, nval) {
+                'form.title': function (nval,val ) {
                     this.form.slug = sanitizeTitle(nval);
-                }
+                },
             },
             mounted(){
-                if("{{$blog}}")
+                if("{{$blogId}}")
                 {
-                    alert("{{$blog}}");
-                }
-                else{
-                    alert("not")
+                    let blog_id = {{$blogId}}
+                    this.form.id = blog_id
+                    axios.get('/admin/blogs/'+ this.form.id)
+                        .then(response => {
+                            let post = response.data.post;
+                            this.form.img =  post[0].img;
+                            this.form.title =  post[0].title;
+                            this.form.category_id =  post[0].category_id;
+                            this.form.tag =post[0].tags.map(data => {
+                                return data.name.fa;
+                            });
+                            this.editableCategory = {id:post[0].category.id,title:post[0].category.title};
+                            this.editableTags = post[0].tags.map(data => {
+                                return {'id':data.id,name:data.name.fa } ;
+                            });
+                            this.form.content = post[0].content;
+                            CKEDITOR.instances['editor'].setData(this.form.content);
+
+
+
+
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+
+                } else{
+                    console.log("insert new post")
                 }
 
             },
@@ -186,7 +208,7 @@
                         this.form.slug = sanitizeTitle(this.form.name);
                     }
                     this.form.content = CKEDITOR.instances.editor.getData();
-                    this.form.submit('post', '/admin/blog').then(response => {
+                    this.form.submit('post', '/admin/blogs').then(response => {
                             Swal.fire(
                                 'ثبت شد!',
                                 'اطلاعات به درستی ثبت شد.',
@@ -206,7 +228,7 @@
 
                 },
                 changePage() {
-                    window.location.href = '/admin/blog';
+                    window.location.href = '/admin/blogs';
                 }
 
 
@@ -237,6 +259,7 @@
         };
         CKEDITOR.replace('editor', options);
         initSample();
+
 
 
     </script>

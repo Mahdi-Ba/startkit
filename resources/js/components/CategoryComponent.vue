@@ -32,18 +32,27 @@
             'editable':Object,
         },
         mounted() {
+/*
             this.selected = this.editable;
+*/
+
             this.callback_function = this.callbackFunction;
         },
+
         /*    components: {
                 /!*      Multiselect: window.VueMultiselect.default*!/
             },*/
         data() {
             return {
-                callback_function: "",
-                selected: "",
+                callback_function: "ss",
+                selected:  '',
                 options: [
                 ]
+            }
+        },
+        watch: {
+            editable(newVal, oldVal) { // watch it
+                this.selected = newVal;
             }
         },
         methods: {

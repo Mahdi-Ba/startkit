@@ -89,7 +89,7 @@
 
             },
             watch:{
-                'form.name':function (val,nval)
+                'form.name':function (nval,val)
                 {
                     this.form.slug = sanitizeTitle(nval);
                 }

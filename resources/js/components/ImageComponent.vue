@@ -102,8 +102,12 @@
                 status: ""
             }
         },
+        watch: {
+            editable(newVal, oldVal) { // watch it
+                this.imageUrl = newVal;
+            }
+        },
         mounted() {
-            this.imageUrl = this.editable;
             this.callback_function = this.callbackFunction;
             this.multiple_data = this.multiple;
         },
