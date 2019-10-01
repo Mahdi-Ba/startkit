@@ -41,3 +41,7 @@ Route::get('/admin/blog/posts', 'BlogController@posts');
 Route::post('/admin/image', 'ImageController@store');
 Route::post('/admin/image/deleted','ImageController@destroy');
 
+
+Route::get('/menu', function () {
+    return view('menu_maker.menu');
+});
