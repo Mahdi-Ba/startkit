@@ -25,6 +25,7 @@ class CategoryController extends Controller
         $categories = $categories->latest()->paginate(8);
         return response()->json($categories);
     }
+
     public function selectCategories(Request $request)
     {
 

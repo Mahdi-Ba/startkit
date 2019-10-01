@@ -111,7 +111,7 @@
                                     <div class="form-group row mt-5 mb-0">
                                         <div class="col-md-6 offset-md-4">
                                             <button {{--:disabled="form.errors.any()"--}} type="submit"
-                                                    class="btn btn-primary">
+                                                    class="btn btn-primary  btn-rounded waves-effect waves-light m-t-20">
                                                 <i class="ti-save"></i>
                                                 ذخیره
                                             </button>
@@ -160,6 +160,7 @@
                 },
             },
             mounted(){
+                @isset($blogId)
                 if("{{$blogId}}")
                 {
                     let blog_id = {{$blogId}}
@@ -168,6 +169,9 @@
                         .then(response => {
                             let post = response.data.post;
                             this.form.img =  post[0].img;
+                            var unwatch =this.$watch('form.title', function (newVal, oldVal) {
+                                this.form.slug =post[0].slug;
+                            });
                             this.form.title =  post[0].title;
                             this.form.category_id =  post[0].category_id;
                             this.form.tag =post[0].tags.map(data => {
@@ -185,13 +189,13 @@
 
                         })
                         .catch(function (error) {
-                            // handle error
                             console.log(error);
                         })
 
                 } else{
                     console.log("insert new post")
                 }
+                @endisset
 
             },
 
@@ -205,7 +209,7 @@
                 },
                 submit() {
                     if (this.form.slug == "") {
-                        this.form.slug = sanitizeTitle(this.form.name);
+                        this.form.slug = sanitizeTitle(this.form.title);
                     }
                     this.form.content = CKEDITOR.instances.editor.getData();
                     this.form.submit('post', '/admin/blogs').then(response => {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Spatie\Tags\Tag;
@@ -17,7 +18,18 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('admin.blog.store', ['blogId' => 3]);
+        return view('admin.blog.list');
+
+    }
+
+    public function posts(Request $request)
+    {
+
+        $blog = Blog::query();
+        if ($request->filled('title'))
+            $blog->where('title', 'like', '%' . $request->title . '%');
+        $blog = $blog->with(['category','user'])->latest()->paginate(6);
+        return response()->json($blog);
     }
 
     /**
@@ -27,7 +39,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.blog.store');
     }
 
     /**
@@ -55,6 +67,7 @@ class BlogController extends Controller
         if ($validator->fails()) {
             return Response($validator->errors(), 400);
         }
+        $request->request->add(['user_id' => Auth::user()->id]);
 
         $blog = Blog::updateOrCreate(['id' => $request->id],
             $request->all()
@@ -76,7 +89,7 @@ class BlogController extends Controller
     public function show($id)
     {
         $post = Blog::where('id', $id)->with(['category'])->with(['tags'])->get();
-        return response(['post'=>$post],200);
+        return response(['post' => $post], 200);
     }
 
     /**
@@ -87,7 +100,7 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.blog.store', ['blog' => $id]);
+        return view('admin.blog.store', ['blogId' => $id]);
     }
 
     /**
@@ -110,6 +123,11 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $blog = Blog::find($id);
+        if ($blog != null) {
+            if($blog->delete())
+                return response('true', 200);
+        }
+        return response('false', 200);
     }
 }

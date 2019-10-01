@@ -13,7 +13,7 @@
                     <h6 class="card-subtitle">
                         <div class="row">
                             <div class="col-3">
-                                <a class="btn btn-outline-primary" href="{{action('TagController@create')}}">افزودن
+                                <a class="btn btn-outline-primary  btn-rounded waves-effect waves-light m-t-20" href="{{action('TagController@create')}}">افزودن
                                     تگ جدید
                                     <i class="ti-save"></i>
                                 </a>
@@ -48,9 +48,9 @@
                                     <td>@{{ tag.slug.fa }}</td>
                                     <td>@{{ tag.updated_at | moment}}</td>
                                     <td>
-                                        <a @click="deleteTag(tag.id)" class="btn btn-outline-danger" href="#">حذف<i
+                                        <a @click="deleteTag(tag.id)" class="btn btn-outline-danger btn-rounded waves-effect waves-light m-t-20" href="#">حذف<i
                                                 class="ti-trash"></i></a>
-                                        <a class="btn btn-outline-info" :href="'/admin/tag/'+tag.id">ویرایش<i
+                                        <a class="btn btn-outline-info btn-rounded waves-effect waves-light m-t-20"  :href="'/admin/tag/'+tag.id">ویرایش<i
                                                 class="ti-trash"></i></a>
 
                                     </td>

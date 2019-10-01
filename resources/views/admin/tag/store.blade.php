@@ -50,7 +50,7 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4" v-bind:class="getClass(form.errors.has('is_active'))">
-                            <button  :disabled="form.errors.any()" type="submit" class="btn btn-primary">
+                            <button  :disabled="form.errors.any()" type="submit" class="btn btn-primary  btn-rounded waves-effect waves-light m-t-20">
                                 <i class="ti-save"></i>
                               ذخیره
                             </button>

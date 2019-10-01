@@ -35,6 +35,7 @@ Route::get('/admin/select_tags', 'TagController@selectTags');
 
 /*Blog*/
 Route::resource('/admin/blogs', 'BlogController');
+Route::get('/admin/blog/posts', 'BlogController@posts');
 
 
 Route::post('/admin/image', 'ImageController@store');

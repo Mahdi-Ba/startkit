@@ -9,11 +9,16 @@ class Blog extends Model
 {
     use HasTags;
 
-    protected $fillable = ['title','slug','content','category_id','img'];
+    protected $fillable = ['title','slug','content','category_id','img','user_id'];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
 }
