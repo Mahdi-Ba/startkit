@@ -25,7 +25,7 @@ class ImageController extends Controller
         ]);
         $images = $request->file('images');
         if ($validator->fails()) {
-            return Response($validator->errors(), 400);
+            return Response(['error' =>$validator->errors()], 200);
         }
         $path =[];
         foreach ($images as $img)

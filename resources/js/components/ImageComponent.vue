@@ -1,7 +1,8 @@
 <template>
     <div class="row">
         <div class="col">
-            <div class="form-group">
+            <div  class="form-group">
+                <p v-show="error" class="text-danger">{{this.error}}</p>
                 <p v-show="!imageUrl" class="text-warning">هنوز تصویری آپلود نشده است.لطفا عکس را انتخاب
                     کنید </p>
                 <div v-for="(img , index) in imageUrl">
@@ -91,6 +92,7 @@
             'editable':Array,
             'callbackFunction': String,
             'multiple': String,
+            'address' : String,
         },
 
         data() {
@@ -99,7 +101,8 @@
                 imageFile: null,
                 imageUrl: [],
                 multiple_data: '',
-                status: ""
+                status: "",
+                error:"",
             }
         },
         watch: {
@@ -124,7 +127,7 @@
                     formData.append('images[]', images[i]);
                 }
 
-                formData.append('address', "/files/shares/blog");
+                formData.append('address', this.address);
 
                 axios.post('/admin/image',
                     formData,
@@ -134,8 +137,16 @@
                         }
                     }
                 ).then(data => {
+                    let finallData = data.data;
+                    if(finallData.error){
 
-                    this.pushMethod(data.data)
+                        let str = finallData.error['images.0'][0];
+                        let finallError = str.replace("images.0", "تصویر");
+                        this.error = finallError;
+                    }else {
+                        this.pushMethod(finallData)
+                    }
+
 
 
                 })

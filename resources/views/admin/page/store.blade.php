@@ -9,6 +9,9 @@
 
     <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
     <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+    <style>
+
+    </style>
 
 @endsection
 
@@ -70,14 +73,25 @@
                                         </div>
                                     </div>
 
-                                    <image-component :address="'/files/shares/blog'" :editable="[form.img]"
+                                    <image-component :address="'/files/shares/page'" :editable="[form.img]"
                                                      {{-- multiple--}} callback-function="picture"></image-component>
                                     <p style="font-size: 80%" class="text-danger" v-show="form.errors.has('img')">
                                         @{{ form.errors.get('img') }}
                                     </p>
                                     <div class="row">
-                                        <category-component
-                                           :editable="editableCategory" callback-function="category"></category-component>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-form-label text-md-right">نوع قالب</label>
+                                                <br>
+                                                <select v-model="form.template_id" class="form-control custom-select" >
+                                                    <option disabled value="" >قالب را انتخاب نمایید</option>
+                                                    <option value="1">قالب اول</option>
+                                                    <option value="2">قالب دوم</option>
+                                                    <option value="3">قالب سوم</option>
+                                                    <option value="4">قالب چهارم</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
                                         <tag-component
                                             :editable="editableTags" callback-function="tag"></tag-component>
@@ -86,8 +100,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <p style="font-size: 80%" class="text-danger"
-                                               v-show="form.errors.has('category_id')">
-                                                @{{ form.errors.get('category_id') }}
+                                               v-show="form.errors.has('template_id')">
+                                                @{{ form.errors.get('template_id') }}
                                             </p>
                                         </div>
                                         <div class="col">
@@ -137,7 +151,7 @@
     <script src="/admin_template/assets/libs/ckeditor/ckeditor.js"></script>
     <script src="/admin_template/assets/libs/ckeditor/samples/js/sample.js"></script>
     <script>
-        var blog = new Vue({
+        var page = new Vue({
 
             el: '#app',
             data: {
@@ -146,11 +160,10 @@
                     title: "",
                     slug: "",
                     content: "",
-                    category_id: "",
+                    template_id: "",
                     tag: [],
                     img: "",
                 }),
-                editableCategory:{},
                 editableTags:[]
             },
             watch: {
@@ -159,27 +172,26 @@
                 },
             },
             mounted(){
-                @isset($blogId)
-
-                    let blog_id = {{$blogId}}
-                    this.form.id = blog_id
-                    axios.get('/admin/blogs/'+ this.form.id)
+                @isset($pageId)
+                    let page_id = {{$pageId}}
+                    this.form.id = page_id;
+                    axios.get('/admin/pages/'+ this.form.id)
                         .then(response => {
-                            let post = response.data.post;
-                            this.form.img =  post[0].img;
+                            let page = response.data.page;
+                            console.log(page);
+                            this.form.img =  page[0].img;
                             var unwatch =this.$watch('form.title', function (newVal, oldVal) {
-                                this.form.slug =post[0].slug;
+                                this.form.slug =page[0].slug;
                             });
-                            this.form.title =  post[0].title;
-                            this.form.category_id =  post[0].category_id;
-                            this.form.tag =post[0].tags.map(data => {
+                            this.form.title =  page[0].title;
+                            this.form.template_id =  page[0].template_id;
+                            this.form.tag =page[0].tags.map(data => {
                                 return data.name.fa;
                             });
-                            this.editableCategory = {id:post[0].category.id,title:post[0].category.title};
-                            this.editableTags = post[0].tags.map(data => {
+                            this.editableTags = page[0].tags.map(data => {
                                 return {'id':data.id,name:data.name.fa } ;
                             });
-                            this.form.content = post[0].content;
+                            this.form.content = page[0].content;
                             CKEDITOR.instances['editor'].setData(this.form.content);
 
 
@@ -189,6 +201,8 @@
                         .catch(function (error) {
                             console.log(error);
                         });
+
+
                 @endisset
 
             },
@@ -206,7 +220,7 @@
                         this.form.slug = sanitizeTitle(this.form.title);
                     }
                     this.form.content = CKEDITOR.instances.editor.getData();
-                    this.form.submit('post', '/admin/blogs').then(response => {
+                    this.form.submit('post', '/admin/pages').then(response => {
                             Swal.fire(
                                 'ثبت شد!',
                                 'اطلاعات به درستی ثبت شد.',
@@ -226,23 +240,20 @@
 
                 },
                 changePage() {
-                    window.location.href = '/admin/blogs';
+                    window.location.href = '/admin/pages';
                 }
 
 
             }
         });
-        blog.$on('category', function (value) {
-            this.form.category_id = value.id;
-        });
-        blog.$on('tag', function (value) {
+        page.$on('tag', function (value) {
             this.form.tag = "";
             this.form.tag = value.map(data => {
                 return data.name;
             });
 
         });
-        blog.$on('picture', function (value) {
+        page.$on('picture', function (value) {
             this.form.img = value[0];
 
         });

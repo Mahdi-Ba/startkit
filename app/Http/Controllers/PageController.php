@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Blog;
+use App\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Spatie\Tags\Tag;
 
-class BlogController extends Controller
+class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,18 +18,18 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('admin.blog.list');
+        return view('admin.page.list');
 
     }
 
-    public function posts(Request $request)
+    public function pages(Request $request)
     {
 
-        $blog = Blog::query();
+        $page = Page::query();
         if ($request->filled('title'))
-            $blog->where('title', 'like', '%' . $request->title . '%');
-        $blog = $blog->with(['category','user'])->latest()->paginate(6);
-        return response()->json($blog);
+            $page->where('title', 'like', '%' . $request->title . '%');
+        $page = $page->with(['user'])->latest()->paginate(6);
+        return response()->json($page);
     }
 
     /**
@@ -39,7 +39,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.store');
+        return view('admin.page.store');
     }
 
     /**
@@ -59,7 +59,7 @@ class BlogController extends Controller
             ],
             'content' => 'required|string',
             'img' => 'required|string',
-            'category_id' => 'required|integer',
+            'template_id' => 'required|integer',
             'tag' => 'required'
 
         ]);
@@ -69,12 +69,12 @@ class BlogController extends Controller
         }
         $request->request->add(['user_id' => Auth::user()->id]);
 
-        $blog = Blog::updateOrCreate(['id' => $request->id],
+        $page = Page::updateOrCreate(['id' => $request->id],
             $request->all()
         );
-        $blog->syncTags($request->tag);
-        $blog->save();
-        if ($blog) {
+        $page->syncTags($request->tag);
+        $page->save();
+        if ($page) {
             return Response('true', 200);
         }
         return Response('false', 200);
@@ -88,8 +88,8 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        $post = Blog::where('id', $id)->with(['category'])->with(['tags'])->get();
-        return response(['post' => $post], 200);
+        $page = Page::where('id', $id)->with(['tags'])->get();
+        return response(['page' => $page], 200);
     }
 
     /**
@@ -100,7 +100,7 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.blog.store', ['blogId' => $id]);
+        return view('admin.page.store', ['pageId' => $id]);
     }
 
 
@@ -112,11 +112,22 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        $blog = Blog::find($id);
-        if ($blog != null) {
-            if($blog->delete())
+        $page = Page::find($id);
+        if ($page != null) {
+            if ($page->delete())
                 return response('true', 200);
         }
         return response('false', 200);
+    }
+
+    public function menu()
+    {
+  $page = Page::latest()->get(['id','title','slug'])->toArray();
+       array_push($page,['id'=>7,'title'=>'salam','slug'=>'salam']);
+
+/*        dd(array_search(7,$page,true));*/
+        $a=[["a"=>"red","b"=>"green","c"=>"blue"]];
+        dd(array_search("red",$a)) ;
+
     }
 }

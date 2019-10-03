@@ -41,6 +41,12 @@ Route::get('/admin/blog/posts', 'BlogController@posts');
 Route::post('/admin/image', 'ImageController@store');
 Route::post('/admin/image/deleted','ImageController@destroy');
 
+/*Blog*/
+Route::resource('/admin/pages', 'PageController');
+Route::get('/admin/page/pages', 'PageController@pages');
+
+Route::get('/admin/page/menu', 'PageController@menu');
+
 
 Route::get('/menu', function () {
     return view('menu_maker.menu');
