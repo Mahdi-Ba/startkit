@@ -133,7 +133,7 @@
                                 @csrf
                             </form>
                             <div class="dropdown-divider"></div>
-                            <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">مشاهده پروفایل</a></div>
+                            <div class="p-l-30 p-10"><a href="/admin/register/{{auth()->user()->id}}" class="btn btn-sm btn-success btn-rounded">مشاهده پروفایل</a></div>
                         </div>
                     </li>
                     <!-- ============================================================== -->
@@ -185,11 +185,11 @@
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin" aria-expanded="false"><i class="ti-loop"></i><span class="hide-menu">داشبورد</span></a></li>
                         <ul aria-expanded="false" class=" first-level">
                             <li class="sidebar-item"><a href="/admin/register" class="sidebar-link"><i class="mdi mdi-account"></i><span class="hide-menu">مدیریت کاربران</span></a></li>
-                            <li class="sidebar-item"><a target="_blank" href="/admin/laravel-filemanager" class="sidebar-link"><i class="mdi mdi-file"></i><span class="hide-menu">مدیریت فایل ها</span></a></li>
+                            <li class="sidebar-item"><a target="_blank" href="/admin/laravel-filemanager" class="sidebar-link"><i class="mdi mdi-paperclip"></i><span class="hide-menu">مدیریت فایل ها</span></a></li>
                             <li class="sidebar-item"><a href="/admin/category" class="sidebar-link"><i class="mdi mdi-archive"></i><span class="hide-menu">مدیریت دسته بندی ها </span></a></li>
                             <li class="sidebar-item"><a href="/admin/tag" class="sidebar-link"><i class="mdi mdi-tag"></i><span class="hide-menu">مدیریت تگ ها </span></a></li>
                             <li class="sidebar-item"><a href="/admin/blogs" class="sidebar-link"><i class="mdi mdi-file-word-box"></i><span class="hide-menu">مدیریت مقالات </span></a></li>
-                            <li class="sidebar-item"><a href="/admin/pages" class="sidebar-link"><i class="mdi mdi-new-box"></i><span class="hide-menu">مدیریت صفحات </span></a></li>
+                            <li class="sidebar-item"><a href="/admin/pages" class="sidebar-link"><i class="mdi mdi-file"></i><span class="hide-menu">مدیریت صفحات </span></a></li>
                             <li class="sidebar-item"><a href="/admin/page/menu" class="sidebar-link"><i class="mdi mdi-menu"></i><span class="hide-menu">مدیریت منو </span></a></li>
                         </ul>
                     </li>
@@ -275,7 +275,7 @@
 <!-- ============================================================== -->
 <!-- customizer Panel -->
 <!-- ============================================================== -->
-<aside class="customizer">
+{{--<aside class="customizer">
     <a href="javascript:void(0)" class="service-panel-toggle"><i class="fa fa-spin fa-cog"></i></a>
     <div class="customizer-body">
         <ul class="nav customizer-tab" role="tablist">
@@ -354,7 +354,7 @@
             <!-- End Tab 1 -->
         </div>
     </div>
-</aside>
+</aside>--}}
 <div class="chat-windows"></div>
 <!-- ============================================================== -->
 <!-- All Jquery -->

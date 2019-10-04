@@ -48,9 +48,9 @@
                                     <td>@{{ tag.slug.fa }}</td>
                                     <td>@{{ tag.updated_at | moment}}</td>
                                     <td>
-                                        <a @click="deleteTag(tag.id)" class="btn btn-outline-danger btn-rounded waves-effect waves-light m-t-20" href="#">حذف<i
+                                        <a @click="deleteTag(tag.id)" class="btn btn-outline-danger btn-rounded waves-effect waves-light" href="#">حذف<i
                                                 class="ti-trash"></i></a>
-                                        <a class="btn btn-outline-info btn-rounded waves-effect waves-light m-t-20"  :href="'/admin/tag/'+tag.id">ویرایش<i
+                                        <a class="btn btn-outline-info btn-rounded waves-effect waves-light"  :href="'/admin/tag/'+tag.id">ویرایش<i
                                                 class="ti-pencil"></i></a>
 
                                     </td>

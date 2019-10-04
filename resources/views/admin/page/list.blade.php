@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('sidebar_title','مدیریت مقالات')
+@section('sidebar_title','مدیریت صفحات')
 @section('header')
     <link href="/admin_template//assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
