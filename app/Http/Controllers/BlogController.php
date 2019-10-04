@@ -73,7 +73,6 @@ class BlogController extends Controller
             $request->all()
         );
         $blog->syncTags($request->tag);
-        $blog->save();
         if ($blog) {
             return Response('true', 200);
         }

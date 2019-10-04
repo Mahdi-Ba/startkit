@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use App\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -52,10 +53,10 @@ class PageController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string', 'max:255',
-                Rule::unique('blogs')->ignore($request->id),
+                Rule::unique('pages')->ignore($request->id),
             ],
             'slug' => ['required', 'string', 'max:255',
-                Rule::unique('blogs')->ignore($request->id),
+                Rule::unique('pages')->ignore($request->id),
             ],
             'content' => 'required|string',
             'img' => 'required|string',
@@ -63,7 +64,12 @@ class PageController extends Controller
             'tag' => 'required'
 
         ]);
-
+        if($request->id == null)
+        {
+             $item  = 'inserted';
+        }else{
+            $item = 'update';
+        }
         if ($validator->fails()) {
             return Response($validator->errors(), 400);
         }
@@ -72,8 +78,23 @@ class PageController extends Controller
         $page = Page::updateOrCreate(['id' => $request->id],
             $request->all()
         );
+        $menu = Menu::updateOrCreate(
+            ['id' => $page->id],
+            [
+                'id' =>$page->id,
+                'title' =>$page->title,
+                'slug' =>$page->slug,
+                'template_id' =>$page->template_id,
+
+            ]
+        );
+        $menu->parent_id = '';
+        $menu->save();
+
+
+
         $page->syncTags($request->tag);
-        $page->save();
+
         if ($page) {
             return Response('true', 200);
         }
@@ -113,6 +134,7 @@ class PageController extends Controller
     public function destroy($id)
     {
         $page = Page::find($id);
+        Menu::find($page->id)->delete();
         if ($page != null) {
             if ($page->delete())
                 return response('true', 200);
@@ -120,14 +142,59 @@ class PageController extends Controller
         return response('false', 200);
     }
 
-    public function menu()
-    {
-  $page = Page::latest()->get(['id','title','slug'])->toArray();
-       array_push($page,['id'=>7,'title'=>'salam','slug'=>'salam']);
+    public function fetchMenu(){
+        $tree = Menu::get()->toTree()->toArray();
+        return response($tree,200);
+    }
 
-/*        dd(array_search(7,$page,true));*/
-        $a=[["a"=>"red","b"=>"green","c"=>"blue"]];
-        dd(array_search("red",$a)) ;
+    public function rebuiltMenu(Request $request){
+
+          /*  Menu::truncate();
+            $node = Menu::create(
+                [
+                'id' =>17,
+                'title' => 'Foo',
+                'slug' => 'Foo',
+                'template_id' =>3,
+                'children' => [
+                    [
+                        'id' =>18,
+                        'title' => 'Bar',
+                        'slug' => 'Bar',
+                        'template_id' =>3,
+                        'children' => [
+                            [
+                                'id' =>19,
+                                'title' => 'Baz',
+                                'slug' => 'Baz',
+                                'template_id' =>3,
+                            ],
+                            [
+                                'id' =>22,
+                                'title' => 'Baz1',
+                                'slug' => 'Baz1',
+                                'template_id' =>3,
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+
+            );*/
+
+
+
+        $array = $request->data;
+       Menu::truncate();
+       foreach ($array as $value)
+       {
+           $node = Menu::create(
+              $value
+
+           );
+       }
 
     }
+
+
 }

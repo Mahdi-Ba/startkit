@@ -53,7 +53,7 @@
                                         <a @click="deleteCategory(category.id)" class="btn btn-outline-danger btn-rounded waves-effect waves-light m-t-20" href="#">حذف<i
                                                 class="ti-trash"></i></a>
                                         <a class="btn btn-outline-info btn-rounded waves-effect waves-light m-t-20" :href="'/admin/category/'+category.id">ویرایش<i
-                                                class="ti-trash"></i></a>
+                                                class="ti-pencil"></i></a>
 
                                     </td>
                                 </tr>

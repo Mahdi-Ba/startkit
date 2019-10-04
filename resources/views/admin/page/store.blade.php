@@ -28,14 +28,14 @@
     @endif
     <div class="col">
         <div class="card">
-            <div class="card-header">مقاله جدید</div>
+            <div class="card-header">صفحه جدید</div>
 
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">ایجاد مقاله جدید</h4>
+                                <h4 class="card-title">ایجاد صفحه جدید</h4>
 
                                 <form method="POST" method="post" enctype="multipart/form-data"
                                       @submit.prevent="submit" @keydown="form.errors.clear($event.target.name)">

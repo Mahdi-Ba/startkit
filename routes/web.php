@@ -45,9 +45,10 @@ Route::post('/admin/image/deleted','ImageController@destroy');
 Route::resource('/admin/pages', 'PageController');
 Route::get('/admin/page/pages', 'PageController@pages');
 
-Route::get('/admin/page/menu', 'PageController@menu');
+Route::post('/admin/page/rebuilt_menu', 'PageController@rebuiltMenu');
+Route::get('/admin/page/fetch_menu', 'PageController@fetchMenu');
 
 
-Route::get('/menu', function () {
-    return view('menu_maker.menu');
+Route::get('/admin/page/menu', function () {
+    return view('admin.menu_maker.menu');
 });

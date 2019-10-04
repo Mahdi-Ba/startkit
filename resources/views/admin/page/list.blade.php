@@ -55,7 +55,7 @@
                                         class="ti-trash"></i></a>
                                 <a class="btn btn-outline-info btn-rounded waves-effect waves-light m-t-20"
                                    :href="'/admin/pages/'+page.id+'/edit'">ویرایش<i
-                                        class="ti-trash"></i></a>
+                                        class="ti-pencil"></i></a>
                             </div>
                         </div>
 

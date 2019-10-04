@@ -190,6 +190,7 @@
                             <li class="sidebar-item"><a href="/admin/tag" class="sidebar-link"><i class="mdi mdi-tag"></i><span class="hide-menu">مدیریت تگ ها </span></a></li>
                             <li class="sidebar-item"><a href="/admin/blogs" class="sidebar-link"><i class="mdi mdi-file-word-box"></i><span class="hide-menu">مدیریت مقالات </span></a></li>
                             <li class="sidebar-item"><a href="/admin/pages" class="sidebar-link"><i class="mdi mdi-new-box"></i><span class="hide-menu">مدیریت صفحات </span></a></li>
+                            <li class="sidebar-item"><a href="/admin/page/menu" class="sidebar-link"><i class="mdi mdi-menu"></i><span class="hide-menu">مدیریت منو </span></a></li>
                         </ul>
                     </li>
                 </ul>
