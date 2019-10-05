@@ -8,7 +8,7 @@ use Kalnoy\Nestedset\NodeTrait;
 class Menu extends Model
 {
     use NodeTrait;
-    protected $fillable =['id','title','slug','template_id'
+    protected $fillable =['page_id','title','slug','template_id'
     ];
 
 }

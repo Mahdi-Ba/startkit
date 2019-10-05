@@ -52,6 +52,8 @@
                             this.menu = JSON.stringify(response.data);
                             var options =
                                 {'json': this.menu,
+                                 maxDepth:3,
+
                                 'contentCallback':function(item) {return item.title || '' ? item.title : item.id;}
 
                             };

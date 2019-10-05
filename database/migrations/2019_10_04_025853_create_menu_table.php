@@ -19,6 +19,7 @@ class CreateMenuTable extends Migration
             $table->string('slug');
             $table->integer('template_id');
             $table->nestedSet();
+            $table->unsignedInteger('page_id')->unique();
             $table->timestamps();
         });
 

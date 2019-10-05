@@ -79,9 +79,9 @@ class PageController extends Controller
             $request->all()
         );
         $menu = Menu::updateOrCreate(
-            ['id' => $page->id],
+            ['page_id' => $page->id],
             [
-                'id' =>$page->id,
+                'page_id' =>$page->id,
                 'title' =>$page->title,
                 'slug' =>$page->slug,
                 'template_id' =>$page->template_id,
@@ -133,8 +133,9 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
+
         $page = Page::find($id);
-        Menu::find($page->id)->delete();
+         Menu::where('page_id','=',$id)->get()->each->delete();
         if ($page != null) {
             if ($page->delete())
                 return response('true', 200);

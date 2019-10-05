@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Blog;
+use App\Page;
+use App\User;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,7 +26,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
     Route::get('/admin', function () {
-        return view('admin.home');
+        return view('admin.home',[
+            'user'=> User::count(),
+            'blog'=> Blog::count(),
+            'page'=> Page::count(),
+        ]);
     });
     Route::resource('/admin/register', 'RegistrationController');
     Route::get('/admin/users', 'RegistrationController@users');

@@ -19,16 +19,16 @@
                             <div class="d-flex align-items-center">
                                 <div class="m-r-10"><span class="text-orange display-5"><i class="mdi mdi-newspaper"></i></span></div>
                                 <div><span class="text-muted">تعداد مقالات</span>
-                                    <h3 class="font-medium m-b-0">0</h3></div>
+                                    <h3 class="font-medium m-b-0">{{$blog}}</h3></div>
                             </div>
                         </div>
                         <!-- col -->
                         <!-- col -->
                         <div class="col-md-6 col-sm-12 col-lg-4">
                             <div class="d-flex align-items-center">
-                                <div class="m-r-10"><span class="text-primary display-5"><i class="mdi mdi-basket"></i></span></div>
-                                <div><span class="text-muted">تعداد محصولات</span>
-                                    <h3 class="font-medium m-b-0">0</h3></div>
+                                <div class="m-r-10"><span class="text-primary display-5"><i class="mdi mdi-file"></i></span></div>
+                                <div><span class="text-muted">تعداد صفحات</span>
+                                    <h3 class="font-medium m-b-0">{{$page}}</h3></div>
                             </div>
                         </div>
                         <!-- col -->
@@ -37,7 +37,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="m-r-10"><span class="display-5"><i class="mdi mdi-account-box"></i></span></div>
                                 <div><span class="text-muted">تعداد کاربران</span>
-                                    <h3 class="font-medium m-b-0">0</h3></div>
+                                    <h3 class="font-medium m-b-0">{{$user}}</h3></div>
                             </div>
                         </div>
                         <!-- col -->
