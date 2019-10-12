@@ -42,8 +42,7 @@
         <div class="auth-box">
             <div id="loginform">
                 <div class="logo">
-                    <span class="db"><img src="admin_template/assets/images/logo-icon.png" alt="logo" /></span>
-                    <h5 class="font-medium m-b-20">پارس اندیشان پروشات</h5>
+                    <span class="db"><img src="admin_template/assets/images/pp1.png"  width="200" height="200" alt="logo" /></span>
                 </div>
                 <!-- Form -->
                 <div class="row">

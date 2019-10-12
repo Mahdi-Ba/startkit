@@ -14,7 +14,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">منو ساز پارس پروشات</h4>
+                        <h4 class="card-title">منو ساز پارس اندیشان پروشات</h4>
                         <div class="myadmin-dd-empty dd" id="nestable-json"></div>
                         <a @click="store()" class="btn btn-outline-purple btn-rounded waves-effect waves-light m-t-20" href="#">ذخیره<i
                                 class="ti-pencil"></i></a>
