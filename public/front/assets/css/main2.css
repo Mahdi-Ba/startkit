@@ -1,0 +1,227 @@
+/* Option-Box*/
+#option-box *, #style-modal * {
+    direction: ltr;
+
+}
+
+#option-box, #style-modal {
+    padding-left: 0;
+
+}
+
+#option-box {
+    position: fixed;
+    top: 0px;
+    left: -100%;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    height: 100%;
+    overflow: visible;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: row-reverse;
+    text-align: left;
+}
+
+#option-box * {
+    text-transform: capitalize;
+}
+
+#option-box .box {
+    background: #fff;
+    padding: 35px 30px;
+    width: 390px;
+    box-shadow: 0 5px 20px 1px rgba(61, 61, 61, .20);
+    -webkit-box-shadow: 0 5px 20px 1px rgba(61, 61, 61, .20);
+    -moz-box-shadow: 0 5px 20px 1px rgba(61, 61, 61, .20);
+    position: relative;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+#option-box.show {
+    left: 0;
+}
+
+#toggle-btn, #option-box {
+    z-index: 1291;
+}
+
+#toggle-btn {
+    background: #7c7c7c;
+    color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 5px 0 rgba(0, 0, 0, .23);
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 5px 0 rgba(0, 0, 0, .23);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 5px 0 rgba(0, 0, 0, .23);
+    cursor: pointer;
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+    opacity: .95;
+    padding: 8px 9px;
+    width: 40px;
+    position: fixed;
+    left: 0;
+    top: 180px;
+    height: 40px;
+    display: block;
+    margin: auto;
+}
+
+#toggle-btn.hide {
+    left: -100%;
+}
+
+#toggle-btn p {
+    margin-bottom: 0;
+}
+
+#close-btn {
+    position: absolute;
+    top: 19px;
+    right: 30px;
+
+}
+
+#close-btn button {
+    outline: 0;
+    font-size: 16px;
+}
+
+.box h6 {
+    margin-bottom: 10px;
+
+}
+
+#option-box .box > [id*=-box] {
+    margin-bottom: 40px;
+}
+
+#style-modal .modal-body {
+    background: #fff;
+    padding: 20px;
+}
+
+.box li * {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.box .btn {
+    font-size: 13px;
+}
+
+.color-preview {
+    border: 0;
+}
+
+.color-picker, select.form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+}
+
+.degree.form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.degree.form-control + input-group-text {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group-text {
+    background-color: #f1f1f1;
+
+}
+
+.colorpicker *, .colorpicker {
+    transition: none !important;
+}
+
+div#style-modal p, div#style-modal ul {
+    color: #4e4e4e;
+}
+
+#style-modal p * {
+    font-weight: 500;
+}
+
+#style-modal ul {
+    margin-bottom: 20px;
+}
+
+#demos-box .demos li {
+    width: 60px;
+    height: 30px;
+    border-radius: 40px;
+    box-shadow: 0 5px 20px 1px rgba(61, 61, 61, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+
+}
+
+#demos-box .demos li.active {
+    box-shadow: 0 5px 20px 1px rgba(61, 61, 61, 0.4);
+
+}
+
+#demos-box .demos li img {
+    width: 100%;
+    min-height: 60%;
+    position: relative;
+    top: 40%;
+}
+
+#comingSoon-page.style-2 #option-box #demos-box {
+    display: none;
+}
+
+@media (min-width: 1281px) {
+    #toggle-btn:hover {
+        width: 50px;
+        padding: 8px 13px;
+    }
+}
+
+@media (max-width: 700px) {
+    #option-box {
+        width: 70%;
+    }
+
+    #demos-box .demos li {
+        width: 40px;
+        height: 20px;
+    }
+
+    #option-box .box {
+        width: 100%;
+        padding: 25px 18px;
+    }
+
+    #option-box:not(.show) {
+        left: -140%;
+    }
+
+    #toggle-btn {
+        padding: 8px 9px;
+        width: 40px;
+    }
+
+    #option-box .box > [id*=-box] {
+        margin-bottom: 10px;
+    }
+
+    .btn-main, .btn-black {
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 325px) {
+    #option-box {
+        width: 80%;
+    }
+
+}

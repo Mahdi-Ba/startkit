@@ -15,14 +15,17 @@ use App\Blog;
 use App\Page;
 use App\User;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'Front\HomeController@index')->name('home');
+Route::get('/page/{slug}', 'Front\HomeController@page')->name('page');
+Route::get('/blog', 'Front\BlogController@blog')->name('blog');
+Route::get('/tag/{tag}', 'Front\BlogController@tag')->name('tag');
+Route::get('/category/{category}', 'Front\BlogController@category')->name('category');
+Route::get('/single_blog/{id}/{slug?}', 'Front\BlogController@single_blog')->name('single_blog');
+
 Route::view('login', 'auth.login')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::middleware(['auth'])->group(function () {
-
-    Route::get('/home', 'HomeController@index')->name('home');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
     Route::get('/admin', function () {

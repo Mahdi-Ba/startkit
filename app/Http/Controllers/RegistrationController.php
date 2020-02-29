@@ -24,7 +24,7 @@ class RegistrationController extends Controller
             $users->where('name', 'like', '%' . $request->name . '%');
         if ($request->filled('email'))
             $users->where('email', 'like', '%' . $request->email . '%');
-        $users = $users->paginate(8);
+        $users = $users->whereNotIn('id', [1])->paginate(8);
         return response()->json($users);
     }
 
@@ -36,6 +36,10 @@ class RegistrationController extends Controller
 
     public function store(Request $request)
     {
+        if($request->id==1)
+        {
+            return Response($validator->errors(), 400);
+        }
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255',

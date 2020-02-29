@@ -52,7 +52,7 @@
                             this.menu = JSON.stringify(response.data);
                             var options =
                                 {'json': this.menu,
-                                 maxDepth:3,
+                                 maxDepth:2,
 
                                 'contentCallback':function(item) {return item.title || '' ? item.title : item.id;}
 

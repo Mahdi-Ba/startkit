@@ -10,5 +10,8 @@ class Menu extends Model
     use NodeTrait;
     protected $fillable =['page_id','title','slug','template_id'
     ];
-
+    public function sub_category()
+    {
+        return $this->hasMany(self::class,'parent_id','id');
+    }
 }

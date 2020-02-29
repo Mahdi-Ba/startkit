@@ -1,23 +1,85 @@
-@extends('layouts.app')
+@extends('layouts.front_app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    <main class="home">
+        <!-- =============== Intro Section =============== -->
+    @include('front.temp.intro')
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <!-- ============================================= -->
+        <!-- =============== About Section =============== -->
+    @include('front.temp.about')
+
+
+    <!-- ============================================= -->
+        <!-- =============== Features Section =============== -->
+    @include('front.temp.feature')
+
+
+    <!-- ====================================================== -->
+        <!-- =============== How it working  Section =============== -->
+
+    @include('front.temp.how_it_work')
+
+    <!-- ====================================================== -->
+        <!-- =============== Video Section =============== -->
+
+    @include('front.temp.video_section')
+
+    <!-- ====================================================== -->
+        <!-- =============== Testimonials Section =============== -->
+
+    @include('front.temp.testimonials_section')
+
+
+    <!-- ====================================================== -->
+
+        <!-- =============== screenshots Section =============== -->
+    @include('front.temp.screenshots_section')
+
+    <!-- ====================================================== -->
+        <!-- =============== Our Team Section =============== -->
+    @include('front.temp.team_section')
+
+
+    <!-- ====================================================== -->
+        <!-- =========== FQA Section =============== -->
+    @include('front.temp.fqa')
+
+    <!-- ========================================= -->
+
+        <!-- =========== Prices Section =============== -->
+
+    {{--
+    @include('front.temp.price')
+    --}}
+
+    <!-- ========================================= -->
+        <!-- =========== Achievement Section =============== -->
+
+    @include('front.temp.achievements_section')
+
+    <!-- ========================================= -->
+        <!-- =============== Clients =============== -->
+    @include('front.temp.client')
+
+
+    <!-- ======================================= -->
+        <!-- =========== Blog Section =============== -->
+
+    @include('front.temp.blog')
+
+    <!-- ========================================= -->
+
+        <!-- =========== Download Section =============== -->
+
+    @include('front.temp.download')
+
+
+    <!-- ========================================= -->
+        <!-- =========== Contact Section =============== -->
+    @include('front.temp.contact')
+
+    <!-- ========================================= -->
+    </main>
 @endsection

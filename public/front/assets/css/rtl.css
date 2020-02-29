@@ -1,0 +1,49 @@
+/*Fonts*/
+@font-face {
+    font-family: 'Sarb';
+    src: url('../fonts/fa/Sarbaz-Regular.eot');
+    src: url('../fonts/fa/Sarbaz-Regulard41d.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/fa/Sarbaz-Regular.woff2') format('woff2'),
+    url('../fonts/fa/Sarbaz-Regular.woff') format('woff'),
+    url('../fonts/fa/Sarbaz-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IS';
+    src: url('../fonts/fa/IS.eot');
+    src: url('../fonts/fa/ISd41d.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/fa/IS.woff') format('woff'),
+    url('../fonts/fa/IS.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.statistic p.count {
+    direction: ltr;
+}
+
+.dropdown-menu {
+    text-align: right;
+    left: initial;
+    right: 0;
+}
+
+#pricing-section .plan .price sup {
+    float: left;
+}
+
+
+/*Typography*/
+body[dir=rtl] {
+    font-family: "sarb";
+}
+
+p {
+    font-family: "IS";
+}
