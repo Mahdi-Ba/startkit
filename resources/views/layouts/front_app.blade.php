@@ -3,14 +3,14 @@
 
 <!-- Mirrored from netita.ir/theme/xena/rtl/ by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 31 Oct 2019 15:45:23 GMT -->
 <head>
-    <title>قالب Xena | قالب HTML لندینگ پیج</title>
+    <title>پارس اندیشان پروشات</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HTML App Landing Page Template">
-    <meta name="keywords" content="Landing app ,HTML,Template,theme,themeforest,envato ">
-    <meta name="Author" content="AliNiyazi , Netita">
-    <meta name="copyright" content="© 2019 Xena All rights reserved ">
-    <link rel="shortcut icon" href="{{ asset( 'front/assets/images/logo/favicon.png')}}">
+    <meta name="description" content="تولید انواع فیبر نوری و مسی">
+    <meta name="keywords" content="پارس اندیشان پروشات">
+    <meta name="Author" content="Mahdi Bahari">
+    <meta name="copyright" content="© 2019 ParsProshat All rights reserved ">
+    <link rel="shortcut icon" href="{{ asset( 'front/assets/images/logo/logo.png')}}">
     <link type="text/css" rel="stylesheet" href="{{ asset( 'front/assets/css/main.css')}}">
     <link type="text/css" rel="stylesheet" href="{{ asset( 'front/assets/css/main2.css')}}">
     <link type="text/css" rel="stylesheet" href="{{ asset( 'front/assets/css/rtl.css')}}">
@@ -64,7 +64,7 @@
             <div class="modal-body">
                 <button class="close" data-dismiss="modal" type="button" aria-label="Close"><span aria-hidden="true">&times;   </span>
                 </button>
-                <img class="img-fluid" src="#" title="Xena" alt="Xena">
+                <img class="img-fluid" src="#" title="پارس اندیشان پروشات" alt="pars andishan proshat">
             </div>
         </div>
     </div>

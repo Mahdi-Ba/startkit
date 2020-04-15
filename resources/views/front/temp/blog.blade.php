@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Section-title -->
         <div class="section-title text-center"><h3>آخرین<strong>وبلاگ ها</strong></h3>
-            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+            <p>رویداد های شرکت  را از این قسمت میتوانید پیگیری نمایید</p>
         </div>
         <!--/ section-title -->
         <!-- Blog List -->

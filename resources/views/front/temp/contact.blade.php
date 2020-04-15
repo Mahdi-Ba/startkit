@@ -4,22 +4,23 @@
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                 <!-- Section-title -->
                 <div class="section-title"><h3>اطلاعات<strong>تماس</strong></h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                        است. </p></div>
+{{--                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک--}}
+{{--                        است. </p>--}}
+                </div>
                 <!--/ section-title -->
                 <!-- Contacts Info -->
                 <div class="contacts-info">
                     <ul class="list-unstyled info">
-                        <li><i class="fas fa-phone"></i><span> 09107195382</span></li>
-                        <li><i class="fas fa-envelope"></i><span>Support@Xena.Com</span></li>
-                        <li><i class="fas fa-map-marker-alt"></i><span> ایران ، خراسان جنوبی ، فردوس</span></li>
+                        <li><i class="fas fa-phone"></i><span> 021-88820011-13</span></li>
+                        <li><i class="fas fa-envelope"></i><span>info@parsproshat.com</span></li>
+                        <li><i class="fas fa-map-marker-alt"></i><span>تهران - خیابان مطهری - خیابان فجر - بن بست مدائن پلاک 1 واحد همکف </span></li>
                     </ul>
                     <!-- Social Media Links -->
                     <ul class="socialMediaLinks list-inline main-style">
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"> </i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"> </i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"> </i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-google-plus-g"> </i></a></li>
+                        <li class="list-inline-item"><a target="_blank" href="https://www.instagram.com/parsproshat"><i class="fab fa-instagram"> </i></a></li>
+                        <li class="list-inline-item"><a  target="_blank" href="https://t.me/parsproshat"><i class="fab fa-telegram"> </i></a></li>
+                        <li class="list-inline-item"><a  target="_blank" href="https://t.me/PARSANDISHANPROSHAT"><i class="fab fa-telegram"> </i></a></li>
+
                     </ul>
                     <!-- ./ Social Media Links -->
                 </div><!-- / Contacts Info -->

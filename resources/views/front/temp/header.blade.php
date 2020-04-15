@@ -1,10 +1,10 @@
 <header id="header">
     <nav class="navbar navbar-expand-lg  fixed-top" id="navbar">
         <div class="container"><!-- Brand -->
-            <a class="navbar-brand mb-0" href="index-2.html"><img class="logo"
-                                                                  src="{{asset('front/assets/images/logo/logo_white.png')}}"
-                                                                  title="Xena"
-                                                                  alt="Xena"/></a>
+            <a class="navbar-brand mb-0" href="/"><img class="logo"
+                                                                  src="{{asset('admin_template/assets/images/pp1.png')}}"
+                                                                  title="پارس اندیشان پروشات"
+                                                                  alt="پارس  اندیشان پروشات"/></a>
             <button class="navbar-toggler" data-target="#navbar-collapse" data-toggle="collapse" type="button"
                     aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span></span><span></span><span></span></button>

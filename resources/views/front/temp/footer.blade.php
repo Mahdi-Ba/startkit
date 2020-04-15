@@ -1,8 +1,8 @@
 <footer>
     <div class="container">
         <!-- App's Logo -->
-        <img class="logo" src="{{asset('front/assets/images/logo/logo_white.png')}}" title="Xena"
-             alt="Xena"/>
+        <img class="logo" src="{{asset('admin_template/assets/images/pp1.png')}}" title="پارس اندیشان پروشات"
+             alt="pars andishan proshat"/>
         <!-- ./ App's Logo -->
         <!-- Begin MailChimp SignUp Form -->
 {{--        <div id="subscribe">
@@ -35,16 +35,16 @@
         </div>--}}
         <!-- End MailChimp SignUp Form -->
         <!-- Social Media Links -->
-        <ul class="socialMediaLinks list-inline gradient-style">
-            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"> </i></a></li>
-            <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"> </i></a></li>
-            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"> </i></a></li>
-            <li class="list-inline-item"><a href="#"><i class="fab fa-google-plus-g"> </i></a></li>
-        </ul>
+{{--        <ul class="socialMediaLinks list-inline gradient-style">--}}
+{{--            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"> </i></a></li>--}}
+{{--            <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"> </i></a></li>--}}
+{{--            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"> </i></a></li>--}}
+{{--            <li class="list-inline-item"><a href="#"><i class="fab fa-google-plus-g"> </i></a></li>--}}
+{{--        </ul>--}}
         <!-- ./ Social Media Links -->
         <!-- Copyright -->
         <div class="copyright p-3 text-center"><p class="m-0"> © 1398 JobTeam </p>
-            <p class="m-0">طراحی شده توسط :<a href="#">jobteam</a></p></div>
+            <p class="m-0">طراحی شده توسط :<a title="Mahdi Bahari" href="https://jobteam.ir/">jobteam</a></p></div>
         <!-- /.Copyright -->
         <!-- Back to top -->
         <div id="top-btn"><p><i class="gradient-text fas fa-chevron-up"></i></p></div>

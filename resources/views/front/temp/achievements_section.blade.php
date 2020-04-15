@@ -3,18 +3,18 @@
         <div class="row">
             <!-- statistics  -->
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="statistic"><p class="lead"><i class="fas fa-download"></i>دانلود ها</p>
-                    <p class="count"><span class="counter" data-from="0" data-to="35">0 </span><span>K</span></p>
+                <div class="statistic"><p class="lead"><i class="fas fa-eye"></i>بازدید ها</p>
+                    <p class="count"><span class="counter" data-from="0" data-to="3">0 </span><span>K</span></p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="statistic"><p class="lead"><i class="far fa-smile"></i>مشتریان خوشحال</p>
+                <div class="statistic"><p class="lead"><i class="far fa-smile"></i>مشتریان </p>
                     <p class="count"><span class="counter" data-from="0" data-to="2.5">0 </span><span>K</span></p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="statistic"><p class="lead"><i class="fas fa-bookmark"></i>رضایت از ما</p>
-                    <p class="count"><span class="counter" data-from="0" data-to="3">0 </span><span>K</span></p>
+                    <p class="count"><span class="counter" data-from="0" data-to="2.5">0 </span><span>K</span></p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12">

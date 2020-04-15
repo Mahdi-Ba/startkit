@@ -1,52 +1,50 @@
 <section id="testimonials-section">
     <div class="container">
         <!-- Section-title -->
-        <div class="section-title"><h3>آنچه <strong>مشتریان ما</strong> می گویند.</h3>
-            <p>آنها کار ما را دوست دارند</p></div>
+        <div class="section-title"><h3>چرا از تولیدات <strong>پارس اندیشان پروشات </strong>بهره ببریم</h3>
+            </div>
         <!--/ section-title -->
         <!-- Testimonials Carousel -->
         <div id="testimonials-carousel">
             <div class="carousel">
                 <div class="owl-carousel">
                     <div class="card">
-                        <div class="card-body"><p class="feedback">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                        <div class="card-body"><p class="feedback"> کسانی که دست‌اندرکار هستند جوری عمل کنند که تولید ان‌شاءالله جهش پیدا کند و یک تغییر محسوسی در زندگی مردم ان‌شاءالله به وجود بیاورد.
+                                 </p>
                             <div class="card-title">
-                                <h6>علی نیازی
-                                    <small>مؤسس شرکت</small>
+                                <h6>سید امام علی خامنه
+                                    <small>رهبر معظم انقلاب اسلامی</small>
                                 </h6>
                                 <div class="quote"><i class="fas fa-quote-left"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-body"><p class="feedback">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                        <div class="card-body"><p class="feedback">استفاده از ظرفیت نیروی متخصص بومی باعث شکوفایی ایران خواهد شد
+                                 </p>
                             <div class="card-title">
-                                <h6>ماریا
-                                    <small>مؤسس شرکت</small>
+                                <h6>پارس اندیشان پروشات
+                                    <small>مؤسسین شرکت</small>
                                 </h6>
                                 <div class="quote"><i class="fas fa-quote-left"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-body"><p class="feedback">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                        <div class="card-body"><p class="feedback">تقویت تولید در ایران از مسیر افزایش اعتماد عمومی به تولید کننده و پیش بینی پذیر شدن اقتصاد می گذرد.</p>
                             <div class="card-title">
-                                <h6>جان دوئه
-                                    <small>مؤسس شرکت</small>
+                                <h6>
+                                    <small></small>
                                 </h6>
                                 <div class="quote"><i class="fas fa-quote-left"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-body"><p class="feedback">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                        <div class="card-body"><p class="feedback">  مصرف کالاهای تولید محلی، با توجه به پیوند اقتصادی بین تولیدکننده و مصرف‌کننده، تقاضا برای منابع نیروی کار محلی را ایجاد می کند و به همین دلیل به مبارزه با بیکاری کمک می کند. </p>
                             <div class="card-title">
-                                <h6>محمد قاسمی
-                                    <small>مؤسس شرکت</small>
+                                <h6>
+                                    <small> </small>
                                 </h6>
                                 <div class="quote"><i class="fas fa-quote-left"></i></div>
                             </div>
@@ -54,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div class="clients-images style-2"><img src="front/assets/images/testimonials-section/1.png" title="Xena"
+            <div class=""><img src="front/assets/images/testimonials-section/10.png" title="Xena"
                                                      alt="Xena"/></div>
         </div>
         <!-- /Testimonials Carousel -->

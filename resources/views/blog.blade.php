@@ -7,7 +7,7 @@
     <div id="innerPageTitle">
         <div class="container">
             <!-- Title -->
-            <div class="title"><h1>وبلاگ پلکانی با ساید بار چپ</h1></div><!-- / Title -->
+            <div class="title"><h1>وبلاگ </h1></div><!-- / Title -->
             <!-- breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">

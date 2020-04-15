@@ -18,7 +18,7 @@
                 <!-- breadcrumb -->
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="home">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="/">خانه</a></li>
                         <li class="breadcrumb-item"><a href="blog">وبلاگ</a></li>
                         {{--
                                                 <li class="breadcrumb-item active">وبلاگ پلکانی با ساید بار چپ</li>
@@ -74,8 +74,8 @@
                                             @endforeach
                                     </ul>
                                 </div>
-                                <div class="share"><p><a href="#"><i class="fas fa-share-alt"></i>این مقاله را به اشتراک بگذارید </a></p>
-                                </div>
+{{--                                <div class="share"><p><a href="#"><i class="fas fa-share-alt"></i>این مقاله را به اشتراک بگذارید </a></p>--}}
+{{--                                </div>--}}
                             </div>
                             <!-- / Tags & Share info  -->
                         </div>
@@ -186,7 +186,7 @@
                         <div class="card blog">
                             <!-- Blog Image -->
 
-                                <div class="card-img-top"><img src="{{asset($related->img)}}" title="Xena" alt="Xena"/></div>
+                                <div class="card-img-top"><img src="{{asset($related->img)}}" title="پارس اندیشان پروشات" alt="pars andishan proshat"/></div>
                                 <!-- Blog Details -->
                                 <div class="card-body">
                                     <div class="card-title">

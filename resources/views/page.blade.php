@@ -7,15 +7,15 @@
         <div id="innerPageTitle">
             <div class="container">
                 <!-- Title -->
-                <div class="title"><h1>وبلاگ پلکانی با ساید بار چپ</h1></div><!-- / Title -->
+                <div class="title"><h1>{{$page->title}}</h1></div><!-- / Title -->
                 <!-- breadcrumb -->
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">خانه</a></li>
-                        {{--
-                                                <li class="breadcrumb-item active">وبلاگ پلکانی با ساید بار چپ</li>
-                        --}}
-                    </ol>
+{{--                    <ol class="breadcrumb">--}}
+{{--                        <li class="breadcrumb-item"><a href="/">خانه</a></li>--}}
+{{--                        --}}{{----}}
+{{--                                                <li class="breadcrumb-item active">وبلاگ پلکانی با ساید بار چپ</li>--}}
+{{--                        --}}
+{{--                    </ol>--}}
                 </nav>
                 <!-- / breadcrumb -->
             </div>
