@@ -30,7 +30,7 @@ class BlogController extends Controller
         }
 
 
-        $related = Blog::withAnyTags($array_tag)->with(['user'])->limit(3)->get();
+        $related = Blog::where('id','<>',$post->id)->withAnyTags($array_tag)->with(['user'])->limit(3)->get();
 
 
         return view('single_blog', ['latest' => $latest, 'post' => $post, 'related' => $related]);
