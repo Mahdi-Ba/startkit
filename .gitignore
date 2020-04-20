@@ -16,4 +16,3 @@ yarn-error.log
 /package-lock.json
 /test.patch
 /yarn.lock
-/public/vendor/
