@@ -15,7 +15,6 @@ use App\Blog;
 use App\Page;
 use App\User;
 
-
 Route::get('/', 'Front\HomeController@index')->name('home');
 Route::get('/page/{slug}', 'Front\HomeController@page')->name('page');
 Route::get('/blog', 'Front\BlogController@blog')->name('blog');
@@ -70,3 +69,4 @@ Route::middleware(['auth'])->group(function () {
 //    });
     Route::get('/admin/page/menu', 'PageController@menuMaker');
 });
+Route::fallback('Front\HomeController@index');
