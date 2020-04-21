@@ -9,7 +9,7 @@
     </div>
     <!-- App Screen -->
     <img class="img-fluid app-screen"
-         src="front/assets/images/app-screens/7.png" title="Xena"
-         alt="Xena"/>
+         src="front/assets/images/app-screens/7.png" title="پارس اندیشان پروشات"
+         alt="پارس اندیشان پروشات"/>
     <!-- /App Screen -->
 </section>

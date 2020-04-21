@@ -52,8 +52,8 @@
                     </div>
                 </div>
             </div>
-            <div class=""><img src="front/assets/images/testimonials-section/10.png" title="Xena"
-                                                     alt="Xena"/></div>
+            <div class=""><img src="front/assets/images/testimonials-section/10.png" title="پارس اندیشان پروشات"
+                                                     alt="پارس اندیشان پروشات"/></div>
         </div>
         <!-- /Testimonials Carousel -->
     </div>

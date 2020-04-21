@@ -28,13 +28,14 @@ Route::post('login', 'Auth\LoginController@login');
 Route::middleware(['auth'])->group(function () {
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-    Route::get('/admin', function () {
-        return view('admin.home',[
-            'user'=> User::count(),
-            'blog'=> Blog::count(),
-            'page'=> Page::count(),
-        ]);
-    });
+//    Route::get('/admin', function () {
+//        return view('admin.home',[
+//            'user'=> User::count(),
+//            'blog'=> Blog::count(),
+//            'page'=> Page::count(),
+//        ]);
+//    });
+    Route::get('/admin','HomeController@adminHome');
     Route::resource('/admin/register', 'RegistrationController');
     Route::get('/admin/users', 'RegistrationController@users');
 
@@ -64,7 +65,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/page/fetch_menu', 'PageController@fetchMenu');
 
 
-    Route::get('/admin/page/menu', function () {
-        return view('admin.menu_maker.menu');
-    });
+//    Route::get('/admin/page/menu', function () {
+//        return view('admin.menu_maker.menu');
+//    });
+    Route::get('/admin/page/menu', 'PageController@menuMaker');
 });

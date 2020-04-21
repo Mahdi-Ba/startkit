@@ -196,6 +196,11 @@ class PageController extends Controller
        }
 
     }
+    public function menumaker()
+    {
+        return view('admin.menu_maker.menu');
+
+    }
 
 
 }
