@@ -28,9 +28,9 @@
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                 <!-- Contact Form -->
                 <div class="contact-form">
-{{--
-                    <form class="needs-validation form" method="post" novalidate
-                          action="https://norhan-mohammed.com/demos/xena/rtl/php/contact.php">
+
+                    <form class="needs-validation form" method="get" novalidate
+                          action="/message/contact">
                         <!-- Name -->
                         <div class="form-group">
                             <div class="input-group"><input class="form-control" id="name" name="name" type="text"
@@ -43,7 +43,7 @@
                         <!-- / Name -->
                         <!--  Phone -->
                         <div class="form-group">
-                            <div class="input-group"><input class="form-control" id="phone" name="phone" type="text"
+                            <div class="input-group"><input class="form-control" id="phone" name="mobile" type="text"
                                                             placeholder="تلفن تماس" required>
                                 <div class="input-group-append"><span class="input-group-text fas fa-phone"></span>
                                 </div>
@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <div class="input-group"><input class="form-control" id="email" name="email"
                                                             type="email" placeholder="ایمیل"
-                                                            required>
+                                                            >
                                 <div class="input-group-append"><span
                                         class="input-group-text fas fa-envelope"></span></div>
                                 <div class="invalid-tooltip">ایمیل خود را وارد کنید.</div>
@@ -68,13 +68,14 @@
                                                           required></textarea>
                             <div class="invalid-tooltip">پیام خود را وارد کنید.</div>
                         </div>
+                        {{csrf_field()}}
                         <!--  /Message -->
                         <!--  Submit Button  -->
                         <button class="btn-gradient" type="submit"><i
                                 class="fab fa-telegram-plane"> </i><span>ارسال</span></button>
                         <!-- / Submit Button  -->
                     </form>
---}}
+
                     <div class="form-messages">
                         <div class="alert"></div>
                     </div>

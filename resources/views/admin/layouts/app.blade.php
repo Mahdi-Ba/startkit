@@ -175,6 +175,7 @@
                         <ul aria-expanded="false" class=" first-level">
                             <li class="sidebar-item"><a href="/admin/register" class="sidebar-link"><i class="mdi mdi-account"></i><span class="hide-menu">مدیریت کاربران</span></a></li>
                             <li class="sidebar-item"><a target="_blank" href="/admin/laravel-filemanager" class="sidebar-link"><i class="mdi mdi-paperclip"></i><span class="hide-menu">مدیریت فایل ها</span></a></li>
+                            <li class="sidebar-item"><a href="/admin/contact" class="sidebar-link"><i class="mdi mdi-email"></i><span class="hide-menu">مدیریت ارتباطات </span></a></li>
                             <li class="sidebar-item"><a href="/admin/category" class="sidebar-link"><i class="mdi mdi-archive"></i><span class="hide-menu">مدیریت دسته بندی ها </span></a></li>
                             <li class="sidebar-item"><a href="/admin/tag" class="sidebar-link"><i class="mdi mdi-tag"></i><span class="hide-menu">مدیریت تگ ها </span></a></li>
                             <li class="sidebar-item"><a href="/admin/blogs" class="sidebar-link"><i class="mdi mdi-file-word-box"></i><span class="hide-menu">مدیریت مقالات </span></a></li>

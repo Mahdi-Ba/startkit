@@ -39,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users', 'RegistrationController@users');
 
 
+    /*contact*/
+    Route::resource('/admin/contact', 'ContactController');
+    Route::get('/admin/contacts', 'ContactController@contacts');
+
     /* category*/
     Route::resource('/admin/category', 'CategoryController');
     Route::get('/admin/categories', 'CategoryController@categories');
@@ -69,4 +73,5 @@ Route::middleware(['auth'])->group(function () {
 //    });
     Route::get('/admin/page/menu', 'PageController@menuMaker');
 });
+Route::post('message/contact/', 'Front\ContactController@store');
 Route::fallback('Front\HomeController@index');
